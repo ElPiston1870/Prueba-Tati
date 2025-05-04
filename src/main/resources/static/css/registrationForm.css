@@ -1,0 +1,88 @@
+/* Variables css */
+:root {
+    /* Colores principales */
+    --yellow-color: #FFD011;
+    --first-blue-color: #003f94;
+    --second-blue-color: #5271FF;
+    /* Colores secundarios-variantes */
+    --DarkBlue: #00008B;
+    --LightBlue: #CADFE8;
+}
+/* Estilos generales */
+*{
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    background-color:  var(--LightBlue);
+}
+/* Formulario */
+main{
+    font-family: "Asul", serif;
+    min-height: 100vh;
+}
+.formulario-container {
+    padding: 30px;
+}
+.form-control {
+    padding: 12px;
+}
+.imagen-mascota {
+    max-width: 100%;
+    height: auto;
+}
+h1, h2 {
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: var(--DarkBlue);
+}
+.text-description {
+    margin-bottom: 30px;
+    color: var(--DarkBlue);
+}
+.form-label {
+    color: var(--DarkBlue);
+}
+.btn-registro {
+    background-color: var(--DarkBlue);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    width: 100%;
+    display: inline-block;
+}
+.btn-registro:hover {
+    background-color: var(--first-blue-color);
+}
+.btn-regresar {
+    background-color: var(--yellow-color);
+    color: #000;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    width: 100%;
+    display: inline-block;
+}
+.btn-regresar:hover {
+    background-color: #FFE252;
+}
+.span-registro{
+    font-size: 14px;
+    margin-top: 30px;
+}
+.registro-link{
+    text-decoration: none;
+    font-weight: bolder;
+    color: #000;
+    transition: .5s;
+}
+.registro-link:hover{
+    text-decoration: underline;
+    color: var(--second-blue-color);
+}
