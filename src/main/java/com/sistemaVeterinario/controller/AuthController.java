@@ -27,6 +27,11 @@ public class AuthController {
         return "registrationForm";
     }
 
+    @GetMapping("/login")
+    public String mostrarLogin() {
+        return "loginForm"; // Asegúrate de tener login.html en templates/
+    }
+
     @PostMapping("/register")
     public String procesarRegistro(
             @Valid @ModelAttribute("usuario") UsuarioDTO usuarioDTO,

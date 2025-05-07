@@ -53,10 +53,9 @@ public class SecurityConfig {
     @Bean
     public AuthenticationSuccessHandler successHandler() {
         return (request, response, authentication) -> {
-            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             String redirectUrl = "/";
 
-            for (GrantedAuthority authority : authorities) {
+            for (GrantedAuthority authority : authentication.getAuthorities()) {
                 if (authority.getAuthority().equals("ROLE_ADMIN")) {
                     redirectUrl = "/admin";
                     break;
@@ -65,6 +64,7 @@ public class SecurityConfig {
                     break;
                 }
             }
+            response.sendRedirect(redirectUrl);  // <-- Esto es lo que faltaba
         };
     }
     @Bean
