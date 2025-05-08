@@ -21,8 +21,13 @@ public class AuthController {
         this.messageSource = messageSource;
     }
 
+    @GetMapping("/login")
+    public String mostrarLogin() {
+        return "loginForm";
+    }
+
     @GetMapping("/register")
-    public String mostrarFormularioRegistro(Model model) {
+    public String mostrarRegistro(Model model) {
         model.addAttribute("usuario", new UsuarioDTO());
         return "registrationForm";
     }
@@ -45,14 +50,13 @@ public class AuthController {
             // Manejo de errores específicos
             String mensaje = e.getMessage();
 
-            if (mensaje.contains("email")) {
+            if (mensaje.contains("correo")) {
                 model.addAttribute("emailError",
                         messageSource.getMessage("error.email.existing", null, LocaleContextHolder.getLocale()));
             } else if (mensaje.contains("teléfono")) {
                 model.addAttribute("telefonoError",
                         messageSource.getMessage("error.phone.existing", null, LocaleContextHolder.getLocale()));
             }
-
             return "/registrationForm";
         }
     }

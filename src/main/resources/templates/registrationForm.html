@@ -54,10 +54,10 @@
                             <div th:if="${#fields.hasErrors('email')}" class="text-danger mt-1">
                                 <span th:each="error : ${#fields.errors('email')}" th:text="${error}"></span>
                             </div>
-                            <!-- Mensaje de error específico para email duplicado -->
-                            <div th:if="${emailError != null}" class="text-danger mt-1">
-                                <span th:text="${emailError}"></span>
-                            </div>
+                        </div>
+                        <!-- Mensaje de error específico para teléfono duplicado -->
+                        <div th:if="${emailError != null}" class="text-danger mt-1">
+                            <span th:text="${emailError}"></span>
                         </div>
                         <!-- Campo Telefono -->
                         <div class="mb-3">
@@ -67,8 +67,8 @@
                                 <span th:each="error : ${#fields.errors('telefono')}" th:text="${error}"></span>
                             </div>
                             <!-- Mensaje de error específico para teléfono duplicado -->
-                            <div th:if="${phoneError != null}" class="text-danger mt-1">
-                                <span th:text="${phoneError}"></span>
+                            <div th:if="${telefonoError != null}" class="text-danger mt-1">
+                                <span th:text="${telefonoError}"></span>
                             </div>
                         </div>
                         <!--Campo Contraseña-->
@@ -84,10 +84,10 @@
                             <button type="submit" class="btn-registro mb-2 fw-bold" th:text="#{registration.button}"></button>
                             <!--Boton para regresar-->
                             <a href="home.html" class="btn-regresar mt-2 fw-bold text-center" th:text="#{registration.returnButton}"></a>
-                            <!--Enlace para registrarse-->
+                            <!--Enlace para loguearse-->
                             <div class="span-registro text-center">
                                 <span th:text="#{registration.questionSpan}"></span>
-                                <a class="registro-link" th:href="@{/auth/login}" th:text="#{registration.loginLink}"></a>
+                                <a class="registro-link" th:href="@{/login}" th:text="#{registration.loginLink}"></a>
                             </div>
                         </div>
                     </form>

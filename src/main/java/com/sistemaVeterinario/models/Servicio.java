@@ -20,7 +20,7 @@ public class Servicio {
     @Column(name = "id_servicio")
     private Integer idServicio;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 45, nullable = false)
     private String nombre;
 
     @Column(columnDefinition = "TEXT")

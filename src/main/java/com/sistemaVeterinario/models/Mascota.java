@@ -21,13 +21,13 @@ public class Mascota {
     @Column(name = "id_mascota")
     private Integer idMascota;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 45, nullable = false)
     private String nombre;
 
     @Column(length = 45, nullable = false)
     private String especie;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 45, nullable = false)
     private String raza;
 
     @Column(name = "fecha_nacimiento", nullable = false)

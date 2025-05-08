@@ -12,8 +12,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import java.util.Collection;
-
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -44,7 +42,7 @@ public class SecurityConfig {
                                 .permitAll()
                 )
                 .exceptionHandling(exception -> {
-                exception.accessDeniedHandler(deniedHandler());
+                    exception.accessDeniedHandler(deniedHandler());
                 });
 
         return http.build();
@@ -53,10 +51,9 @@ public class SecurityConfig {
     @Bean
     public AuthenticationSuccessHandler successHandler() {
         return (request, response, authentication) -> {
-            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             String redirectUrl = "/";
 
-            for (GrantedAuthority authority : authorities) {
+            for (GrantedAuthority authority : authentication.getAuthorities()) {
                 if (authority.getAuthority().equals("ROLE_ADMIN")) {
                     redirectUrl = "/admin";
                     break;
@@ -65,6 +62,7 @@ public class SecurityConfig {
                     break;
                 }
             }
+            response.sendRedirect(redirectUrl);  // <-- Esto es lo que faltaba
         };
     }
     @Bean

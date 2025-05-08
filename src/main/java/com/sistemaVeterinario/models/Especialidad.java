@@ -20,7 +20,7 @@ public class Especialidad {
     @Column(name = "id_especialidad")
     private Integer idEspecialidad;
 
-    @Column(name = "nombre", length = 100, nullable = false, unique = true)
+    @Column(name = "nombre", length = 45, nullable = false, unique = true)
     private String nombre;
 
     @OneToMany(mappedBy = "especialidad")

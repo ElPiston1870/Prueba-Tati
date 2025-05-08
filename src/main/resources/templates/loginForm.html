@@ -44,7 +44,8 @@
                         <a href="home.html" class="btn-regresar fw-bold my-2 text-center" th:text="#{login.returnButton}"></a>
                         <!--Enlace para registrarse-->
                         <div class="span-registro text-center">
-                            <span th:text="#{login.questionSpan}"><a th:href="@{/auth/register}" th:text="#{login.registerLink}"></a></span>
+                            <span th:text="#{login.questionSpan}"></span>
+                            <a th:href="@{/register}" th:text="#{login.registerLink}"></a>
                         </div>
                     </form>
                 </div>
