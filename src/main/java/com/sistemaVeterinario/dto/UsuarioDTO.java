@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class UsuarioDTO {
 
-    @Pattern(regexp = "^(?!\\s)([a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]{3,50})(?<!\\s)$", message = "{error.name.invalid}")
+    @Pattern(regexp = "^(?!\\s)([a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]{3,45})(?<!\\s)$", message = "{error.name.invalid}")
     private String nombre;
 
     @Pattern(regexp = "^(?!\\s)([a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]{3,50})(?<!\\s)$", message = "{error.lastname.invalid}")

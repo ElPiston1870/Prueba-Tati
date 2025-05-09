@@ -7,15 +7,14 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h1>¡Hola Usuario, Bienvenido a tu Cuenta!</h1>
-                <p>Has iniciado sesión con rol de USUARIO.</p>
-                <form th:action="@{/logout}" method="post">
-                    <button type="submit" class="btn btn-danger mt-3">Cerrar Sesión</button>
-                </form>
-            </div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1>¡Hola Usuario, Bienvenido a tu Cuenta!</h1>
+            <p>Has iniciado sesión con rol de USUARIO.</p>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-danger mt-3">Cerrar Sesión</button>
+            </form>
         </div>
     </div>
 </body>

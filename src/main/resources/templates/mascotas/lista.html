@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Mascotas - Sistema Veterinario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .pet-card {
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        .pet-card:hover {
+            transform: translateY(-10px);
+        }
+        .pet-image {
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: calc(0.375rem - 1px);
+            border-top-right-radius: calc(0.375rem - 1px);
+        }
+        .empty-state {
+            text-align: center;
+            padding: 40px 0;
+        }
+        .empty-state i {
+            font-size: 60px;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<!-- Incluir navbar desde fragmento -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">Mis Mascotas</h2>
+                <a th:href="@{/mascotas/nueva}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Agregar Mascota
+                </a>
+            </div>
+
+            <!-- Alerta de éxito -->
+            <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${success != null}">
+                <i class="fas fa-check-circle"></i> <span th:text="${success}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <!-- Alerta de error -->
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${error != null}">
+                <i class="fas fa-exclamation-circle"></i> <span th:text="${error}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <!-- Lista de mascotas -->
+            <div th:if="${#lists.isEmpty(mascotas)}" class="empty-state">
+                <i class="fas fa-paw"></i>
+                <h4>No tienes mascotas registradas</h4>
+                <p class="text-muted">Registra tu primera mascota haciendo clic en el botón "Agregar Mascota"</p>
+                <a th:href="@{/mascotas/nueva}" class="btn btn-primary mt-3">
+                    <i class="fas fa-plus"></i> Agregar Mascota
+                </a>
+            </div>
+
+            <div th:if="${not #lists.isEmpty(mascotas)}" class="row">
+                <div th:each="mascota : ${mascotas}" class="col-md-4 mb-4">
+                    <div class="card pet-card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${mascota.nombre}">Nombre de la mascota</h5>
+                            <p class="card-text">
+                                <span class="badge bg-primary" th:text="${mascota.especie}">Especie</span>
+                                <span class="badge bg-secondary" th:text="${mascota.raza}">Raza</span>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <i class="fas fa-birthday-cake me-1"></i>
+                                    <span th:text="${#temporals.format(mascota.fechaNacimiento, 'dd/MM/yyyy')}">Fecha de nacimiento</span>
+                                </small>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <i class="fas fa-venus-mars me-1"></i>
+                                    <span th:text="${mascota.sexo}">Sexo</span>
+                                </small>
+                            </p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0">
+                            <div class="d-flex justify-content-between">
+                                <a th:href="@{/mascotas/detalles/{id}(id=${mascota.idMascota})}" class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-eye"></i> Ver
+                                </a>
+                                <a th:href="@{/mascotas/editar/{id}(id=${mascota.idMascota})}" class="btn btn-outline-secondary btn-sm">
+                                    <i class="fas fa-edit"></i> Editar
+                                </a>
+                                <a th:href="@{/mascotas/eliminar/{id}(id=${mascota.idMascota})}"
+                                   class="btn btn-outline-danger btn-sm"
+                                   onclick="return confirm('¿Estás seguro de eliminar esta mascota?')">
+                                    <i class="fas fa-trash"></i> Eliminar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

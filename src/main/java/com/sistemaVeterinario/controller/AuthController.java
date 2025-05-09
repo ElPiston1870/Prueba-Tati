@@ -1,8 +1,11 @@
 package com.sistemaVeterinario.controller;
 
 import com.sistemaVeterinario.dto.UsuarioDTO;
+import com.sistemaVeterinario.models.Servicio;
 import com.sistemaVeterinario.service.AuthService;
+import com.sistemaVeterinario.service.ServicioService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
@@ -10,8 +13,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class AuthController {
+
+    @Autowired
+    private ServicioService servicioService;
 
     private final AuthService authService;
     private final MessageSource messageSource;
@@ -19,6 +27,13 @@ public class AuthController {
     public AuthController(AuthService authService, MessageSource messageSource) {
         this.authService = authService;
         this.messageSource = messageSource;
+    }
+
+    @GetMapping("/")
+    public String home(Model model) {
+        List<Servicio> servicios = servicioService.findAllActive();
+        model.addAttribute("servicios", servicios);
+        return "index";
     }
 
     @GetMapping("/login")

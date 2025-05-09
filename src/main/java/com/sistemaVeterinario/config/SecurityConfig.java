@@ -22,9 +22,13 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/", "/public/**","/register","/login","/css/**","/js/**","/assets/**").permitAll()
+                                .requestMatchers("/", "/public/**","/register","/login","/css/**","/js/**"
+                                        ,"/assets/**", "/img/**", "/webjars/**", "/error/**").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .requestMatchers("/veterinarios/**").hasRole("ADMIN")
+                                .requestMatchers("/servicios/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/user/**").hasRole("USER")
+                                .requestMatchers("/agendar/**").hasAnyRole("ADMIN", "USER")
                                 .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->
@@ -62,7 +66,7 @@ public class SecurityConfig {
                     break;
                 }
             }
-            response.sendRedirect(redirectUrl);  // <-- Esto es lo que faltaba
+            response.sendRedirect(redirectUrl);
         };
     }
     @Bean
