@@ -20,10 +20,10 @@ public class Usuario {
     @Column(name = "id_usuario")
     private Integer idUsuario;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 50, nullable = false)
     private String nombre;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 50, nullable = false)
     private String apellido;
 
     @Column(length = 255, nullable = false, unique = true)

@@ -34,7 +34,7 @@
     margin-bottom: 48px;
 }
 .left-image{
-    background-image: url("../assets/imgContenido/imgLogin.jpg");
+    background-image: url("../assets/auth/imgLogin_1.jpg");
     background-position: center;
     background-size: cover;
     border-radius: 10px 0 0 10px;
@@ -115,13 +115,13 @@
     font-size: 14px;
     margin-top: 30px;
 }
-span a{
+.login-link{
     text-decoration: none;
     font-weight: bolder;
     color: #000;
     transition: .5s;
 }
-span a:hover{
+.login-link:hover{
     text-decoration: underline;
     color: var(--second-blue-color);
 }
@@ -129,7 +129,7 @@ span a:hover{
 @media only screen and (max-width: 767px){
     .left-image{
         border-radius: 10px 10px 0 0;
-        background-image: url("../assets/imgContenido/hola5.jpg");
+        background-image: url("../assets/auth/imgLogin_2.jpg");
     }
     .row{
         max-width:450px;

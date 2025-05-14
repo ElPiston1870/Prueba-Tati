@@ -1,0 +1,52 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
+/* Variables css */
+:root {
+    /* Colores principales */
+    --yellow-color: #FFD011;
+    --first-blue-color: #003f94;
+    --second-blue-color: #5271FF;
+    /* Colores secundarios-variantes */
+    --DarkBlue: #00008B;
+    --LightBlue: #CADFE8;
+}
+/* Estilos del Footer */
+.vetplanet-footer {
+    background-color: var(--DarkBlue);
+    color: white;
+    padding-top: 2rem;
+}
+.footer-title {
+    color: white;
+    font-weight: bolder;
+}
+.footer-logo-container {
+    display: flex;
+    align-items: center;
+}
+.footer-logo {
+    background-color: var(--yellow-color);
+    border-radius: 8px;
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+}
+.footer-icon{
+    color: var(--yellow-color);
+}
+.bi{
+    font-size: 1.2rem;
+}
+.footer-link {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+.footer-link:hover {
+    color: var(--yellow-color);
+}
+.footer-copyright {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 1rem 0;
+    margin-top: 1.5rem;
+}

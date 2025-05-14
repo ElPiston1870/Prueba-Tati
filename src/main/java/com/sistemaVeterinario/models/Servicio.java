@@ -23,7 +23,7 @@ public class Servicio {
     @Column(length = 45, nullable = false)
     private String nombre;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String descripcion;
 
     @Column(name = "activo")

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/registrationForm.css}">
+    <!-- Titulo -->
+    <title>Registro</title>
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Asul:wght@400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!--Formulario de registro-->
+    <div class="container">
+        <div class="row formulario-container">
+            <!--Columna izquierda texto e imagen-->
+            <div class="fondo-left col-md-6 p-4">
+                <h2 th:text="#{registration.slogan}"></h2>
+                <p class="text-description" th:text="#{registration.description}"></p>
+                <img th:src="@{/assets/auth/imgSignUp.png}" alt="Mascota" class="imagen-mascota">
+            </div>
+
+            <!--Formulario-->
+            <div class="fondo-rigth col-md-6">
+                <div class="p-4">
+                    <h2 th:text="#{registration.formTitle}"></h2>
+                    <form th:action="@{/register}" method="post" th:object="${usuario}" id="registrationForm" novalidate>
+                        <!--Campo Nombre-->
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label fw-bolder" th:text="#{registration.name}"></label>
+                            <input type="text" class="form-control mb-3" id="nombre" th:field="*{nombre}" th:placeholder="#{registration.namePlaceholder}">
+                            <div th:if="${#fields.hasErrors('nombre')}" class="text-danger mt-1">
+                                <span th:each="error : ${#fields.errors('nombre')}" th:text="${error}"></span>
+                            </div>
+                        </div>
+                        <!--Campo Apellido-->
+                        <div class="mb-3">
+                            <label for="apellido" class="form-label fw-bolder" th:text="#{registration.lastName}"></label>
+                            <input type="text" class="form-control mb-3" id="apellido" th:field="*{apellido}" th:placeholder="#{registration.lastNamePlaceholder}">
+                            <div th:if="${#fields.hasErrors('apellido')}" class="text-danger mt-1">
+                                <span th:each="error : ${#fields.errors('apellido')}" th:text="${error}"></span>
+                            </div>
+                        </div>
+                        <!-- Campo Email -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-bolder" th:text="#{registration.email}"></label>
+                            <input type="email" class="form-control mb-3" id="email" th:field="*{email}" th:placeholder="#{registration.emailPlaceholder}">
+                            <div th:if="${#fields.hasErrors('email')}" class="text-danger mt-1">
+                                <span th:each="error : ${#fields.errors('email')}" th:text="${error}"></span>
+                            </div>
+                        </div>
+                        <!-- Mensaje de error específico para teléfono duplicado -->
+                        <div th:if="${emailError != null}" class="text-danger mt-1">
+                            <span th:text="${emailError}"></span>
+                        </div>
+                        <!-- Campo Telefono -->
+                        <div class="mb-3">
+                            <label for="telefono" class="form-label fw-bolder" th:text="#{registration.phone}"></label>
+                            <input type="tel" class="form-control mb-3" id="telefono" th:field="*{telefono}" th:placeholder="#{registration.phonePlaceholder}">
+                            <div th:if="${#fields.hasErrors('telefono')}" class="text-danger mt-1">
+                                <span th:each="error : ${#fields.errors('telefono')}" th:text="${error}"></span>
+                            </div>
+                            <!-- Mensaje de error específico para teléfono duplicado -->
+                            <div th:if="${telefonoError != null}" class="text-danger mt-1">
+                                <span th:text="${telefonoError}"></span>
+                            </div>
+                        </div>
+                        <!--Campo Contraseña-->
+                        <div class="mb-3">
+                            <label for="password" class="form-label fw-bolder" th:text="#{registration.password}"></label>
+                            <input type="password" class="form-control mb-3" id="password" th:field="*{contrasena}" th:placeholder="#{registration.passwordPlaceholder}">
+                            <div th:if="${#fields.hasErrors('contrasena')}" class="text-danger mt-1">
+                                <span th:each="error : ${#fields.errors('contrasena')}" th:text="${error}"></span>
+                            </div>
+                        </div>
+                        <div class="container-btn my-4">
+                            <!--Boton de registro-->
+                            <button type="submit" class="btn-registro mb-2 fw-bold" th:text="#{registration.button}"></button>
+                            <!--Boton para regresar-->
+                            <a th:href="@{/}" class="btn-regresar mt-2 fw-bold text-center" th:text="#{registration.returnButton}"></a>
+                            <!--Enlace para loguearse-->
+                            <div class="span-registro text-center">
+                                <span th:text="#{registration.questionSpan}"></span>
+                                <a class="registro-link" th:href="@{/login}" th:text="#{registration.loginLink}"></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

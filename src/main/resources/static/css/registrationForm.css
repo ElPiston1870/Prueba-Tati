@@ -8,6 +8,7 @@
     --DarkBlue: #00008B;
     --LightBlue: #CADFE8;
 }
+
 /* Estilos generales */
 *{
     box-sizing: border-box;
@@ -19,6 +20,7 @@ body{
     padding: 0;
     background-color:  var(--LightBlue);
 }
+
 /* Formulario */
 main{
     font-family: "Asul", serif;

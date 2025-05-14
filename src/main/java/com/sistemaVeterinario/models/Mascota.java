@@ -34,7 +34,7 @@ public class Mascota {
     private LocalDate fechaNacimiento;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "sexo")
+    @Column(name = "sexo", nullable = false)
     private SexoMascota sexo;
 
     public enum SexoMascota {

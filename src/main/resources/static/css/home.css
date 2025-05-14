@@ -1,0 +1,192 @@
+/* Variables css */
+:root {
+    /* Colores principales */
+    --yellow-color: #FFD011;
+    --first-blue-color: #003f94;
+    --second-blue-color: #5271FF;
+    /* Colores secundarios-variantes */
+    --DarkBlue: #00008B;
+    --LightBlue: #CADFE8;
+}
+
+/* Estilos generales */
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family: "Montserrat", sans-serif !important;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+/* Banner */
+.banner-section {
+    margin-top: 96px;
+    overflow: hidden;
+}
+.img-banner {
+    height: 480px;
+    object-fit: cover;
+    object-position: center;
+}
+.banner-info{
+    color: var(--DarkBlue);
+    font-family: "Asul", serif;
+}
+.btn-agendar {
+    background-color: var(--yellow-color);
+    color: black;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+.btn-agendar:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Cards servicios */
+.header-title {
+    color: var(--first-blue-color);
+}
+.header-description{
+    font-size: 18px;
+}
+.service-card {
+    background-color: white;
+    border-radius: 4px;
+    height: 100%;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #dee2e6;
+}
+.service-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.service-image-container {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+.service-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+.service-card:hover .service-image {
+    transform: scale(1.05);
+}
+.service-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Carrusel Profesiones */
+.veterinarians{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 40px 60px 40px;
+}
+.veterinarians-title{
+    color: var(--first-blue-color);
+}
+.veterinarians .carousel{
+    max-width: 800px;
+}
+.carousel-item{
+    height: 500px;
+}
+.carousel-item .container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.employee-image{
+    height: 150px;
+    width: 150px;
+    margin: 10px 10px 20px 10px;
+}
+.employee-text{
+    max-width: 70%;
+    font-size: 20px;
+    text-align: center;
+}
+.employee-info{
+    font-weight: bold;
+    text-align: center;
+}
+.employee-info p{
+    margin-bottom: 0;
+}
+.employee-name{
+    font-size: 1.2rem;
+}
+.employee-info .profession{
+    font-size: 0.9rem;
+}
+
+/* ===== Responsive ===== */
+/* Responsive banner */
+@media (max-width: 767px) {
+    .banner-section {
+        margin-top: 66px;
+    }
+    .img-banner {
+        height: 250px;
+        object-position: right 20%;
+    }
+    .banner-container {
+        background-color: var(--LightBlue);
+        position: static;
+    }
+    .row {
+        height: auto;
+    }
+    .banner-info {
+        color: var(--DarkBlue);
+        text-align: center;
+        padding: 2rem 1rem;
+    }
+    .btn-agendar {
+        margin: 0 auto;
+        display: block;
+        max-width: fit-content;
+    }
+}
+@media (max-width: 480px) {
+    .banner-container{
+        background-color: var(--LightBlue);
+    }
+    .img-banner{
+        object-position: right;
+        height: 400px;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+    .btn-agendar{
+        font-size: 1rem;
+        padding: 10px;
+    }
+}
+/*Responsive Carrusel*/
+@media screen and (max-width: 767px) {
+    .employee-image{
+        height: 120px;
+        width: 120px;
+    }
+    .employee-text{
+        font-size: 1rem;
+    }
+}

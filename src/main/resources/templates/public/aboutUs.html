@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros</title>
+    <link rel="stylesheet" th:href="@{/css/aboutUs.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Asul:wght@400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <!-- Navbar -->
+        <div th:replace="fragments/navbar :: navbar"></div>
+        <!-- Banner -->
+        <div class="banner">
+            <div class="banner-content">
+                <h1 class="display-4 fw-bold">Acerca de Nosotros</h1>
+            </div>
+        </div>
+    </header>
+    <!-- Contenido principal -->
+    <div class="container">
+        <!-- Misión Card (Imagen a la izquierda) -->
+        <div class="info-card">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <div class="card-img-container">
+                        <img src="../assets/aboutUs/imgAboutUs_1.jpg" alt="Nuestra Misión">
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-content">
+                        <h2 class="card-title">Nuestra Misión</h2>
+                        <p>En VetPlanet, nuestra misión es brindar atención integral y especializada a las mascotas, asegurando su bienestar y calidad de vida a través de servicios veterinarios de excelencia, tecnología avanzada y un equipo comprometido con la salud animal.</p>
+                        <p>Nos esforzamos por crear un vínculo de confianza con los propietarios, promoviendo la educación sobre el cuidado responsable y ofreciendo soluciones personalizadas para cada necesidad, siempre con empatía y profesionalismo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visión Card (Imagen a la derecha) -->
+        <div class="info-card">
+            <div class="row g-0">
+                <div class="col-md-8 order-md-1 order-2">
+                    <div class="card-content">
+                        <h2 class="card-title">Nuestra Visión</h2>
+                        <p>En VetPlanet, nuestra visión es ser el referente líder en cuidado veterinario, ofreciendo innovación y excelencia para garantizar el bienestar de las mascotas y la tranquilidad de sus dueños..</p>
+                        <p>Aspiramos a construir una comunidad consciente del cuidado animal, promoviendo valores de respeto, amor y responsabilidad hacia las mascotas y su entorno.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 order-md-2 order-1">
+                    <div class="card-img-container">
+                        <img src="../assets/aboutUs/imgAboutUs_2.jpg" alt="Nuestra Visión">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pilares Card (Imagen a la izquierda) -->
+        <div class="info-card">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <div class="card-img-container">
+                        <img src="../assets/aboutUs/imgAboutUs_3.jpg" alt="Nuestros Pilares">
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-content">
+                        <h2 class="card-title">Nuestros Pilares</h2>
+                        <p>Estos son los valores fundamentales que guían nuestras acciones y decisiones:</p>
+                        <ul class="pilares-list">
+                            <li><strong>Innovación Constante</strong> - Buscamos continuamente nuevas formas de mejorar y evolucionar, adaptándonos rápidamente a un entorno cambiante.</li>
+                            <li><strong>Compromiso con la Excelencia</strong> - Nos esforzamos por alcanzar los más altos estándares en todo lo que hacemos, sin comprometer la calidad.</li>
+                            <li><strong>Responsabilidad Social</strong> - Nos comprometemos a operar de manera ética y sostenible, contribuyendo positivamente a nuestras comunidades y al medio ambiente.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="faq-title fw-bold">Preguntas Frecuentes</h2>
+
+            <div class="accordion" id="faqAccordion">
+                <!-- Pregunta 1 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            ¿Cómo puedo agendar una cita para mi mascota?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Para agendar una cita, primero debes estar registrado e iniciar sesión en la plataforma. Luego, podrás acceder a tu panel de usuario, registrar a tu mascota si aún no lo has hecho, y seleccionar el servicio que necesitas. El sistema te mostrará las fechas y horarios disponibles a partir del día siguiente.
+                        </div>
+                    </div>
+                </div>
+                <!-- Pregunta 2 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            ¿Puedo reservar una cita para el mismo día?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            No. Por funcionamiento del sistema, las citas deben agendarse con al menos un día de anticipación. Es decir, hoy solo podrás ver y reservar horarios disponibles para mañana o días posteriores.
+                        </div>
+                    </div>
+                </div>
+                <!-- Pregunta 3 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            ¿Puedo registrar más de una mascota en mi cuenta?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Sí, nuestra plataforma permite que cada usuario registre múltiples mascotas desde su panel personal. Podrás ingresar los datos de cada una (como nombre, especie, raza, edad, etc.) y gestionar sus citas de forma individual. Esto es ideal si tienes varios animales en casa, ya que puedes llevar un seguimiento separado del historial de citas y servicios utilizados.
+                        </div>
+                    </div>
+                </div>
+                <!-- Pregunta 4 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            ¿Qué pasa si el servicio que necesito no está disponible?
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Si no hay disponibilidad para el servicio que deseas, el sistema te lo indicará directamente en el panel de citas. Te recomendamos revisar nuevamente más tarde o elegir otra fecha, ya que los espacios se actualizan constantemente según la demanda.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <div th:replace="fragments/footer :: footer"></div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

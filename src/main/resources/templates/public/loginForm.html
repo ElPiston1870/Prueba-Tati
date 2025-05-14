@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" th:href="@{/css/loginForm.css}">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Asul:wght@400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper px-4 py-0">
+    <div class="container main">
+        <div class="row">
+            <!--Contenido del lado izquierdo-imagen-->
+            <div class="col-md-6 left-image"></div>
+
+            <div class="col-md-6 right">
+                <div class="input-box">
+                    <header class="header text-center" th:text="#{login.title}"></header>
+                    <!--Formulario de inicio de sesion-->
+                    <form th:action="@{/login}" method="post">
+                        <!--Campo nombre-->
+                        <div class="input-field">
+                            <input type="email" name="username" class="input" id="email" required="" autocomplete="off">
+                            <label for="email" th:text="#{login.email}"></label>
+                        </div>
+                        <!--Campo contraseña-->
+                        <div class="input-field">
+                            <input type="password" name="password" class="input" id="password" required="">
+                            <label for="password" th:text="#{login.password}"></label>
+                        </div>
+                        <!-- Mensaje de error de credenciales -->
+                        <div th:if="${errorMessage != null}" class="text-danger mt-3 text-center">
+                            <p th:text="${errorMessage}"></p>
+                        </div>
+                        <!--Boton de inicio de sesion-->
+                        <button type="submit" class="btn-login fw-bold my-2" th:text="#{login.button}"></button>
+                        <!--Boton para regresar-->
+                        <a th:href="@{/}" class="btn-regresar fw-bold my-2 text-center" th:text="#{login.returnButton}"></a>
+                        <!--Enlace para registrarse-->
+                        <div class="span-registro text-center">
+                            <span th:text="#{login.questionSpan}"></span>
+                            <a class="login-link" th:href="@{/register}" th:text="#{login.registerLink}"> <span th:text="#{login.questionSpan}"></span></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

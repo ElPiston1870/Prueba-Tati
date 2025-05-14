@@ -1,0 +1,105 @@
+/* Variables css */
+:root {
+    /* Colores principales */
+    --yellow-color: #FFD011;
+    --first-blue-color: #003f94;
+    --second-blue-color: #5271FF;
+    /* Colores secundarios-variantes */
+    --DarkBlue: #00008B;
+    --LightBlue: #CADFE8;
+}
+
+body {
+    font-family: "Montserrat", sans-serif !important;
+    background-color: #ffffff;
+}
+
+/* Banner */
+.banner {
+    position: relative;
+    height: 520px;
+    background: url('../assets/aboutUs/imgBannerAboutUs_1.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+.banner-content {
+    text-align: center;
+    color: white;
+}
+
+/* Cards */
+.info-card {
+    margin-bottom: 3rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+}
+.card-img-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.card-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.card-content {
+    padding: 2rem;
+}
+.card-title {
+    color: var(--first-blue-color);
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+/* Pilares */
+.pilares-list {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin: 0;
+}
+.pilares-list li {
+    margin-bottom: 1rem;
+    color: black;
+}
+.pilares-list li::marker {
+    color: var(--first-blue-color);
+    font-size: 1.5rem;
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 3rem 0;
+    margin-top: 2rem;
+}
+.faq-title {
+    color: var(--first-blue-color);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.accordion-button:not(.collapsed) {
+    background-color: var(--first-blue-color) !important;
+    color: white !important;
+}
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(0, 63, 148, 0.25) !important;
+}
+.accordion-button.collapsed::after {
+    color: var(--first-blue-color) !important;
+}
+
+/* Responsiveness */
+@media (max-width: 767.98px) {
+    .banner {
+        height: 350px;
+    }
+    .card-img-container {
+        height: 250px;
+    }
+}
