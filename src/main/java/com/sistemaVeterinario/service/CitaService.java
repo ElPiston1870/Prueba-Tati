@@ -5,6 +5,7 @@ import com.sistemaVeterinario.models.Usuario;
 import com.sistemaVeterinario.repository.CitaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -35,7 +36,7 @@ public class CitaService {
     public List<LocalTime> obtenerHorariosDisponibles(LocalDate fecha, Integer servicioId) {
         // Horarios posibles: 16 slots de 30 minutos desde las 9:00 hasta las 17:00
         List<LocalTime> todosLosHorarios = new ArrayList<>();
-        for (int hora = 9; hora < 17; hora++) {
+        for (int hora = 8; hora < 17; hora++) {
             todosLosHorarios.add(LocalTime.of(hora, 0));
             todosLosHorarios.add(LocalTime.of(hora, 30));
         }
@@ -60,5 +61,21 @@ public class CitaService {
         return todosLosHorarios.stream()
                 .filter(horario -> !horariosOcupados.contains(horario))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Actualiza el estado de las citas pasadas a "Completada"
+     * @return número de citas actualizadas
+     */
+    @Transactional
+    public int actualizarCitasPasadas() {
+        LocalDateTime ahora = LocalDateTime.now();
+
+        int citasActualizadas = citaRepository.actualizarCitasPasadas(
+                Cita.EstadoCita.Completada,
+                Cita.EstadoCita.Programada,
+                ahora);
+
+        return citasActualizadas;
     }
 }

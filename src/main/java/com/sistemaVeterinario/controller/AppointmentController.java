@@ -72,7 +72,15 @@ public class AppointmentController {
         List<String> horasFormateadas = new ArrayList<>();
         Map<String, Boolean> disponibilidad = new HashMap<>();
 
-        for (int i = 9; i < 17; i++) { // 9am a 5pm
+        for (int i = 8; i < 12; i++) { // 9am a 5pm
+            for (int m = 0; m < 60; m += 30) { // Intervalos de 30 minutos
+                LocalTime hora = LocalTime.of(i, m);
+                String horaStr = hora.toString();
+                horasFormateadas.add(horaStr);
+                disponibilidad.put(horaStr, horariosDisponibles.contains(hora));
+            }
+        }
+        for (int i = 13; i < 17; i++) { // 9am a 5pm
             for (int m = 0; m < 60; m += 30) { // Intervalos de 30 minutos
                 LocalTime hora = LocalTime.of(i, m);
                 String horaStr = hora.toString();
@@ -129,8 +137,10 @@ public class AppointmentController {
 
         // Obtener citas del usuario a través de sus mascotas
         List<Cita> citas = citaService.findByPropietario(usuarioActual);
+        List<Mascota> mascotas = mascotaService.findByPropietario(usuarioActual);
 
         model.addAttribute("citas", citas);
+        model.addAttribute("mascotas", mascotas);
 
         return "citas/mis-citas";
     }

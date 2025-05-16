@@ -71,10 +71,9 @@
             <div class="col-md-4">
               <select id="mascotaFilter" class="form-select">
                 <option value="">Todas las mascotas</option>
-                <option th:each="cita : ${citas}"
-                        th:if="${cita.mascota != null}"
-                        th:value="${cita.mascota.idMascota}"
-                        th:text="${cita.mascota.nombre}">
+                <option th:each=" mascota : ${mascotas}"
+                        th:value="${mascota.idMascota}"
+                        th:text="${mascota.nombre}">
                 </option>
               </select>
             </div>

@@ -49,9 +49,6 @@ public class Usuario {
     @OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL)
     private Set<Mascota> mascotas = new HashSet<>();
 
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private VeterinarioInfo veterinarioInfo;
-
     @PrePersist
     public void prePersist(){
         fechaRegistro = LocalDateTime.now();

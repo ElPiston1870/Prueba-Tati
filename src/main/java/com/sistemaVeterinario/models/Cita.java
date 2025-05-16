@@ -1,15 +1,14 @@
 package com.sistemaVeterinario.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "citas")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cita {
@@ -26,10 +25,6 @@ public class Cita {
     @ManyToOne
     @JoinColumn(name = "id_servicio", nullable = false)
     private Servicio servicio;
-
-    @ManyToOne
-    @JoinColumn(name = "id_veterinario")
-    private VeterinarioInfo veterinario;
 
     @Column(name = "fecha_hora", nullable = false)
     private LocalDateTime fechaHora;
