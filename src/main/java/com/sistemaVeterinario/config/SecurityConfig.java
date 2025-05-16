@@ -25,10 +25,7 @@ public class SecurityConfig {
                                 .requestMatchers("/","/about-us","/register","/login","/css/**","/js/**"
                                         ,"/assets/**", "/webjars/**", "/error/**").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                                .requestMatchers("/veterinarios/**").hasRole("ADMIN")
-                                .requestMatchers("/servicios/admin/**").hasRole("ADMIN")
-                                .requestMatchers("/user/**").hasRole("USER")
-                                .requestMatchers("/agendar/**").hasAnyRole("ADMIN", "USER")
+                                .requestMatchers("/mascotas","/citas").hasAnyRole("ADMIN","USER")
                                 .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->
@@ -59,10 +56,10 @@ public class SecurityConfig {
 
             for (GrantedAuthority authority : authentication.getAuthorities()) {
                 if (authority.getAuthority().equals("ROLE_ADMIN")) {
-                    redirectUrl = "/admin";
+                    redirectUrl = "/admin/usuarios";
                     break;
                 } else if (authority.getAuthority().equals("ROLE_USER")) {
-                    redirectUrl = "/user";
+                    redirectUrl = "/citas/mis-citas";
                     break;
                 }
             }

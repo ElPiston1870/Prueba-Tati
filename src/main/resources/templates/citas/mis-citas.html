@@ -143,14 +143,6 @@
                   </div>
                 </div>
 
-                <div th:if="${cita.veterinario != null}">
-                  <small class="text-muted">Veterinario:</small>
-                  <p>
-                    <i class="fas fa-user-md me-1"></i>
-                    <span th:text="${cita.veterinario.usuario.nombre + ' ' + cita.veterinario.usuario.apellido}"></span>
-                  </p>
-                </div>
-
                 <div class="d-flex justify-content-end mt-3">
                   <a th:if="${cita.estado.name() == 'Programada'}"
                      th:href="@{/citas/cancelar/{id}(id=${cita.idCita})}"

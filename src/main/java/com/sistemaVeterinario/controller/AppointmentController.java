@@ -30,9 +30,6 @@ public class AppointmentController {
     private ServicioService servicioService;
 
     @Autowired
-    private VeterinarioService veterinarioService;
-
-    @Autowired
     private CitaService citaService;
 
     @GetMapping("/agendar")
@@ -112,13 +109,10 @@ public class AppointmentController {
         Mascota mascota = mascotaService.findById(mascotaId);
         Servicio servicio = servicioService.findById(servicioId);
 
-        // Encontrar veterinario disponible para el servicio
-        VeterinarioInfo veterinario = veterinarioService.encontrarVeterinarioDisponible(servicioId, fechaHora);
 
         // Configurar cita
         cita.setMascota(mascota);
         cita.setServicio(servicio);
-        cita.setVeterinario(veterinario);
         cita.setFechaHora(fechaHora);
         cita.setEstado(Cita.EstadoCita.Programada);
 
@@ -249,13 +243,10 @@ public class AppointmentController {
         Mascota mascota = mascotaService.findById(mascotaId);
         Servicio servicio = servicioService.findById(servicioId);
 
-        // Encontrar veterinario disponible para el servicio
-        VeterinarioInfo veterinario = veterinarioService.encontrarVeterinarioDisponible(servicioId, fechaHora);
 
         // Configurar cita
         cita.setMascota(mascota);
         cita.setServicio(servicio);
-        cita.setVeterinario(veterinario);
         cita.setFechaHora(fechaHora);
 
         // Guardar cita

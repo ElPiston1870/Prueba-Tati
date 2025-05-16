@@ -16,6 +16,4 @@ public class UsuarioService {
     public Optional<Usuario> findByEmail(String email) {
         return usuarioRepository.findByEmail(email);
     }
-
-    // Otros métodos...
 }

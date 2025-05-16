@@ -80,7 +80,6 @@
             <tr>
               <th>Fecha</th>
               <th>Servicio</th>
-              <th>Veterinario</th>
               <th>Estado</th>
               <th>Acciones</th>
             </tr>
@@ -89,7 +88,6 @@
             <tr th:each="cita : ${mascota.citas}">
               <td th:text="${#temporals.format(cita.fechaHora, 'dd/MM/yyyy HH:mm')}">Fecha</td>
               <td th:text="${cita.servicio.nombre}">Servicio</td>
-              <td th:text="${cita.veterinario != null ? cita.veterinario.usuario.nombre + ' ' + cita.veterinario.usuario.apellido : 'No asignado'}">Veterinario</td>
               <td>
                 <span th:class="${'badge ' +
               (cita.estado.name() == 'Programada' ? 'bg-primary' :

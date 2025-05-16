@@ -29,6 +29,8 @@ public class PublicController {
         this.messageSource = messageSource;
     }
 
+
+
     @GetMapping("/")
     public String home(Model model) {
         List<Servicio> servicios = servicioService.findAllActive();

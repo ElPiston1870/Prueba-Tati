@@ -29,8 +29,6 @@ public class Servicio {
     @Column(name = "activo")
     private Boolean activo = true;
 
-    @OneToMany(mappedBy = "servicio")
-    private Set<VeterinarioInfo> veterinarios = new HashSet<>();
 
     @OneToMany(mappedBy = "servicio")
     private Set<Cita> citas = new HashSet<>();
