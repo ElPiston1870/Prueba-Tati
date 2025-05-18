@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
+
+/*===== VARIABLES CSS =====*/
+:root {
+    /* Colores */
+    --first-color: #12192C;
+    --second-color: #F5A623;
+    --white-color: #EDEDED;
+
+    /* Tipografía */
+    --body-font: 'Quicksand', sans-serif;
+    --small-font-size: 0.875rem;
+
+    /* Z-Index */
+    --z-back: -10;
+    --z-normal: 1;
+    --z-tooltip: 10;
+    --z-fixed: 100;
+    --z-modal: 1000;
+
+    /* Ancho navbar y peso fuente */
+    --nav-width: 56px;
+    --font-bold: 700;
+}
+
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+body {
+    position: relative;
+    margin: 0;
+    padding: 1rem 0 0 5rem;
+    font-family: var(--body-font);
+    background-color: var(--white-color);
+    transition: 0.5s;
+}
+body.expander .main-content {
+    padding-left: 1.5rem;
+}
+h1 {
+    margin: 0;
+}
+ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+
+/* Navbar */
+.l-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--nav-width);
+    height: 100vh;
+    background-color: var(--first-color);
+    padding: 1.25rem 0.5rem 2rem;
+    transition: 0.5s;
+    z-index: var(--z-fixed);
+}
+.nav {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+.nav__logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.8rem;
+    padding: 0 0.5rem;
+}
+.nav__logo-icon {
+    margin-right: 1rem;
+    width: 30px;
+    font-weight: var(--body-font);
+}
+.nav__logo-text {
+    color: var(--white-color);
+    font-weight: var(--font-bold);
+}
+.nav__toggle {
+    position: absolute;
+    top: 1.10rem;
+    right: -0.6rem;
+    width: 18px;
+    height: 18px;
+    background-color: var(--second-color);
+    border-radius: 50%;
+    font-size: 1.25rem;
+    color: var(--first-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.nav__link {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    color: var(--white-color);
+    transition: 0.3s;
+}
+.nav__link:hover {
+    background-color: var(--second-color);
+    color: var(--first-color);
+}
+.nav__icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+.nav__text {
+    font-weight: var(--font-bold);
+}
+
+/* Clases dinamicas */
+.show {
+    width: calc(var(--nav-width) + 112px);
+}
+.rotate {
+    transform: rotate(180deg);
+    transition: 0.5s;
+}
+.active {
+    background-color: var(--second-color);
+    color: var(--first-color);
+}
+.expander {
+    padding: 1rem 0 0 12rem;
+    transition: 0.5s;
+}
+
+/* Responsive */
+@media screen and (min-width: 768px){
+    :root {
+        --small-font-size: 0.938rem;
+    }
+}

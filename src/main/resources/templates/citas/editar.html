@@ -3,294 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reprogramar Cita - Sistema Veterinario</title>
+    <title>Editar Cita - Sistema Veterinario</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .time-slot {
-            padding: 10px;
-            margin: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
-        }
-        .time-slot.available {
-            background-color: #d4edda;
-            color: #155724;
-        }
-        .time-slot.unavailable {
-            background-color: #f8d7da;
-            color: #721c24;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-        .time-slot.selected {
-            background-color: #007bff;
-            color: white;
-            border-color: #007bff;
-        }
-        .calendar-container {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .section-title {
-            padding-bottom: 10px;
-            border-bottom: 2px solid #007bff;
-            margin-bottom: 20px;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- ESTILOS CSS -->
+    <link rel="stylesheet" th:href="@{/css/editarcita.css}">
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}">
 </head>
 <body>
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-10">
-            <div class="card shadow">
-                <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0">Reprogramar Cita</h3>
-                </div>
-                <div class="card-body">
-                    <div class="alert alert-info mb-4">
-                        <i class="fas fa-info-circle me-2"></i> Estás reprogramando una cita existente. Selecciona los nuevos detalles para tu cita.
+<!-- Incluir sidebar desde fragmento -->
+<div th:replace="fragments/sidebaruser :: sidebar"></div>
+
+<!-- Contenido principal con padding adecuado -->
+<div class="main-content">
+    <!-- Encabezado de página -->
+    <div class="page-header">
+        <h1 class="page-title">Reprogramar Cita</h1>
+        <p class="page-subtitle">Modifique los detalles de su cita</p>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-info mb-4">
+                <i class="fas fa-info-circle me-2"></i> Estás reprogramando una cita existente. Selecciona los nuevos detalles para tu cita.
+            </div>
+
+            <form th:action="@{/citas/actualizar/{id}(id=${cita.idCita})}" method="post" id="citaForm" class="reprogramar-form">
+                <div class="row">
+                    <!-- Sección para seleccionar mascota y servicio -->
+                    <div class="col-md-6">
+                        <div class="form-section">
+                            <h5 class="section-title">Datos de la Cita</h5>
+
+                            <div class="form-group mb-4">
+                                <label for="mascotaId" class="form-label">Seleccione su mascota:</label>
+                                <select class="form-select" id="mascotaId" name="mascotaId" required>
+                                    <option value="">-- Seleccione una mascota --</option>
+                                    <option th:each="mascota : ${mascotas}"
+                                            th:value="${mascota.idMascota}"
+                                            th:text="${mascota.nombre + ' (' + mascota.especie + ' - ' + mascota.raza + ')'}"
+                                            th:selected="${mascota.idMascota == cita.mascota.idMascota}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label for="servicioId" class="form-label">Tipo de servicio:</label>
+                                <select class="form-select" id="servicioId" name="servicioId" required>
+                                    <option value="">-- Seleccione un servicio --</option>
+                                    <option th:each="servicio : ${servicios}"
+                                            th:value="${servicio.idServicio}"
+                                            th:text="${servicio.nombre}"
+                                            th:selected="${servicio.idServicio == cita.servicio.idServicio}"
+                                            th:data-descripcion="${servicio.descripcion}">
+                                    </option>
+                                </select>
+                                <div id="servicioDescripcion" class="form-text mt-2"
+                                     th:text="${'Descripción: ' + cita.servicio.descripcion}"></div>
+                            </div>
+                        </div>
                     </div>
 
-                    <form th:action="@{/citas/actualizar/{id}(id=${cita.idCita})}" method="post" id="citaForm">
-                        <div class="row">
-                            <!-- Sección para seleccionar mascota -->
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label for="mascotaId" class="form-label fw-bold">Seleccione su mascota:</label>
-                                    <select class="form-select" id="mascotaId" name="mascotaId" required>
-                                        <option value="">-- Seleccione una mascota --</option>
-                                        <option th:each="mascota : ${mascotas}"
-                                                th:value="${mascota.idMascota}"
-                                                th:text="${mascota.nombre + ' (' + mascota.especie + ' - ' + mascota.raza + ')'}"
-                                                th:selected="${mascota.idMascota == cita.mascota.idMascota}">
-                                        </option>
-                                    </select>
-                                </div>
+                    <!-- Sección para seleccionar fecha -->
+                    <div class="col-md-6">
+                        <div class="form-section">
+                            <h5 class="section-title">Fecha de la Cita</h5>
 
-                                <div class="form-group mb-3">
-                                    <label for="servicioId" class="form-label fw-bold">Tipo de servicio:</label>
-                                    <select class="form-select" id="servicioId" name="servicioId" required>
-                                        <option value="">-- Seleccione un servicio --</option>
-                                        <option th:each="servicio : ${servicios}"
-                                                th:value="${servicio.idServicio}"
-                                                th:text="${servicio.nombre}"
-                                                th:selected="${servicio.idServicio == cita.servicio.idServicio}"
-                                                th:data-descripcion="${servicio.descripcion}">
-                                        </option>
-                                    </select>
-                                    <div id="servicioDescripcion" class="form-text text-muted mt-2"
-                                         th:text="${'Descripción: ' + cita.servicio.descripcion}"></div>
-                                </div>
+                            <div class="form-group mb-4">
+                                <label for="fechaSeleccionada" class="form-label">Seleccione una fecha:</label>
+                                <select class="form-select" id="fechaSeleccionada" name="fechaSeleccionada" required>
+                                    <option value="">-- Seleccione una fecha --</option>
+                                    <option th:each="fecha : ${fechasDisponibles}"
+                                            th:value="${fecha}"
+                                            th:text="${#temporals.format(fecha, 'EEEE, d MMMM yyyy')}"
+                                            th:selected="${fecha.equals(cita.fechaHora.toLocalDate())}">
+                                    </option>
+                                </select>
                             </div>
 
-                            <!-- Sección para seleccionar fecha -->
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label for="fechaSeleccionada" class="form-label fw-bold">Seleccione una fecha:</label>
-                                    <select class="form-select" id="fechaSeleccionada" name="fechaSeleccionada" required>
-                                        <option value="">-- Seleccione una fecha --</option>
-                                        <option th:each="fecha : ${fechasDisponibles}"
-                                                th:value="${fecha}"
-                                                th:text="${#temporals.format(fecha, 'EEEE, d MMMM yyyy')}"
-                                                th:selected="${fecha.equals(cita.fechaHora.toLocalDate())}">
-                                        </option>
-                                    </select>
-                                </div>
-
-                                <div class="alert alert-info" id="fechaSeleccionInfo">
-                                    <i class="fas fa-info-circle"></i> Seleccione una fecha para ver los horarios disponibles.
-                                </div>
+                            <div class="alert alert-info" id="fechaSeleccionInfo">
+                                <i class="fas fa-info-circle"></i> Seleccione una fecha para ver los horarios disponibles.
                             </div>
                         </div>
-
-                        <!-- Sección para seleccionar hora -->
-                        <div class="row mt-3 mb-4">
-                            <div class="col-12">
-                                <div class="section-title">
-                                    <h5>Horarios Disponibles</h5>
-                                </div>
-                                <div id="horariosContainer" class="row g-2">
-                                    <div class="col-12 text-center py-4">
-                                        <p class="text-muted">Seleccione una fecha y servicio para ver los horarios disponibles</p>
-                                    </div>
-                                </div>
-                                <input type="hidden" id="horaSeleccionada" name="horaSeleccionada"
-                                       th:value="${#temporals.format(cita.fechaHora, 'HH:mm')}" required>
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <a th:href="@{/citas/mis-citas}" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left"></i> Cancelar
-                            </a>
-                            <button type="submit" class="btn btn-primary" id="btnReservar">
-                                <i class="fas fa-calendar-check"></i> Actualizar Cita
-                            </button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
+
+                <!-- Sección para seleccionar hora -->
+                <div class="form-section mt-4">
+                    <h5 class="section-title">Horarios Disponibles</h5>
+                    <div id="horariosContainer" class="row g-3 mt-2">
+                        <div class="col-12 text-center py-4">
+                            <p class="text-muted">Seleccione una fecha y servicio para ver los horarios disponibles</p>
+                        </div>
+                    </div>
+                    <input type="hidden" id="horaSeleccionada" name="horaSeleccionada"
+                           th:value="${#temporals.format(cita.fechaHora, 'HH:mm')}" required>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a th:href="@{/citas/mis-citas}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Cancelar
+                    </a>
+                    <button type="submit" class="btn btn-primary" id="btnReservar">
+                        <i class="fas fa-calendar-check"></i> Actualizar Cita
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
-<!-- Footer -->
-<div th:replace="fragments/footer :: footer"></div>
-
 <!-- Scripts -->
+<script th:src="@{/js/sidebar.js}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
-<script th:inline="javascript">
-    $(document).ready(function() {
-        // Valores iniciales de la cita
-        const citaActual = {
-            mascotaId: /*[[${cita.mascota.idMascota}]]*/ null,
-            servicioId: /*[[${cita.servicio.idServicio}]]*/ null,
-            fecha: /*[[${cita.fechaHora.toLocalDate()}]]*/ null,
-            hora: /*[[${#temporals.format(cita.fechaHora, 'HH:mm')}]]*/ null
-        };
-
-        // Cargar horarios para la fecha y servicio inicial
-        if (citaActual.fecha) {
-            cargarHorarios(citaActual.fecha);
-            $('#fechaSeleccionInfo').hide();
-        }
-
-        // Actualizar descripción del servicio al seleccionar
-        $('#servicioId').change(function() {
-            var descripcion = $(this).find('option:selected').data('descripcion');
-            if (descripcion) {
-                $('#servicioDescripcion').html('<strong>Descripción:</strong> ' + descripcion);
-            } else {
-                $('#servicioDescripcion').html('');
-            }
-
-            // Si ya hay fecha seleccionada, actualizar horarios
-            var fecha = $('#fechaSeleccionada').val();
-            if (fecha) {
-                cargarHorarios(fecha);
-            }
-        });
-
-        // Cargar horarios al seleccionar fecha
-        $('#fechaSeleccionada').change(function() {
-            var fecha = $(this).val();
-            if (fecha) {
-                cargarHorarios(fecha);
-                $('#fechaSeleccionInfo').hide();
-            } else {
-                $('#horariosContainer').html('<div class="col-12 text-center py-4"><p class="text-muted">Seleccione una fecha para ver los horarios disponibles</p></div>');
-                $('#fechaSeleccionInfo').show();
-            }
-        });
-
-        // Función para cargar horarios disponibles
-        function cargarHorarios(fecha) {
-            var servicioId = $('#servicioId').val();
-
-            $.ajax({
-                url: '/citas/horarios/' + fecha,
-                method: 'GET',
-                data: {
-                    servicioId: servicioId || '',
-                    citaId: /*[[${cita.idCita}]]*/ null // Excluir la cita actual
-                },
-                success: function(response) {
-                    renderizarHorarios(response);
-                },
-                error: function(error) {
-                    console.error('Error al cargar horarios:', error);
-                    $('#horariosContainer').html('<div class="col-12"><div class="alert alert-danger">Error al cargar horarios disponibles. Intente nuevamente.</div></div>');
-                }
-            });
-        }
-
-        // Renderizar los horarios en la interfaz
-        function renderizarHorarios(data) {
-            var html = '';
-            var horas = data.horas;
-            var disponibilidad = data.disponibilidad;
-
-            if (horas.length === 0) {
-                html = '<div class="col-12 text-center py-4"><p class="text-muted">No hay horarios disponibles para esta fecha</p></div>';
-            } else {
-                // Agrupar horarios por hora (mañana y tarde)
-                var horariosMañana = [];
-                var horariosTarde = [];
-
-                horas.forEach(function(hora) {
-                    var hourNum = parseInt(hora.split(':')[0]);
-                    if (hourNum < 13) {
-                        horariosMañana.push(hora);
-                    } else {
-                        horariosTarde.push(hora);
-                    }
-                });
-
-                // Renderizar sección mañana
-                html += '<div class="col-md-6"><h6 class="mb-3">Mañana</h6>';
-                horariosMañana.forEach(function(hora) {
-                    var disponible = disponibilidad[hora];
-                    var isSelected = hora === citaActual.hora;
-                    var clasesAdicionales = isSelected ? 'selected' : (disponible ? 'available' : 'unavailable');
-                    var horaFormateada = formatearHora(hora);
-
-                    html += '<div class="time-slot ' + clasesAdicionales + '" ' +
-                        ((disponible || isSelected) ? 'onclick="seleccionarHora(\'' + hora + '\', this)"' : '') +
-                        '>' + horaFormateada + '</div>';
-                });
-                html += '</div>';
-
-                // Renderizar sección tarde
-                html += '<div class="col-md-6"><h6 class="mb-3">Tarde</h6>';
-                horariosTarde.forEach(function(hora) {
-                    var disponible = disponibilidad[hora];
-                    var isSelected = hora === citaActual.hora;
-                    var clasesAdicionales = isSelected ? 'selected' : (disponible ? 'available' : 'unavailable');
-                    var horaFormateada = formatearHora(hora);
-
-                    html += '<div class="time-slot ' + clasesAdicionales + '" ' +
-                        ((disponible || isSelected) ? 'onclick="seleccionarHora(\'' + hora + '\', this)"' : '') +
-                        '>' + horaFormateada + '</div>';
-                });
-                html += '</div>';
-            }
-
-            $('#horariosContainer').html(html);
-        }
-
-        // Exponer función de selección de hora al ámbito global
-        window.seleccionarHora = function(hora, elemento) {
-            // Limpiar selección anterior
-            $('.time-slot').removeClass('selected');
-
-            // Marcar nuevo elemento
-            $(elemento).addClass('selected');
-
-            // Guardar valor
-            $('#horaSeleccionada').val(hora);
-        };
-
-        // Función para formatear hora en formato 12h
-        window.formatearHora = function(hora24) {
-            var partes = hora24.split(':');
-            var hora = parseInt(partes[0]);
-            var minutos = partes[1];
-            var periodo = hora >= 12 ? 'PM' : 'AM';
-
-            // Convertir a formato 12h
-            if (hora > 12) hora -= 12;
-            if (hora === 0) hora = 12;
-
-            return hora + ':' + minutos + ' ' + periodo;
-        };
-    });
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js" crossorigin="anonymous"></script>
+<script th:src="@{/js/editarcita.js}" th:inline="javascript">
+    // El contenido del script se moverá a un archivo separado,
+    // pero necesitamos mantener th:inline="javascript" para las variables Thymeleaf
 </script>
 </body>
 </html>

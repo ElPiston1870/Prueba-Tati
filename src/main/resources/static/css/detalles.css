@@ -1,18 +1,75 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
-.pet-image {
-    height: 250px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
+
+/* Estilos para las secciones de información */
 .info-section {
-    background-color: #f8f9fa;
+    background-color: #ffffff;
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 .section-title {
-    border-bottom: 2px solid #007bff;
+    border-bottom: 2px solid #F5A623;
     padding-bottom: 10px;
     margin-bottom: 20px;
+    color: #12192C;
+}
+/* Estilos para el contenido principal */
+.main-content {
+    padding-top: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    transition: padding-left 0.5s;
+}
+
+/* Estilos para el encabezado de la página */
+.page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.page-title {
+    color: #12192C;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+/* Estilos para la información de la mascota */
+.pet-info {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.list-group-item {
+    border-left: none;
+    border-right: none;
+}
+
+/* Adaptación cuando el sidebar está expandido */
+body.expander .main-content {
+    padding-left: 9rem;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .main-content {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .row {
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
+    }
+
+    .col-md-4, .col-md-8 {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
 }

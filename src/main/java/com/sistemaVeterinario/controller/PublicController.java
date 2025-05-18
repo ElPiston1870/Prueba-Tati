@@ -29,7 +29,10 @@ public class PublicController {
         this.messageSource = messageSource;
     }
 
-
+    @GetMapping("/error/403")
+    public String error403() {
+        return "error/403"; // Página específica para acceso denegado
+    }
 
     @GetMapping("/")
     public String home(Model model) {

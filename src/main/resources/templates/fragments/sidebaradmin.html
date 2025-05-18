@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar Admin</title>
+</head>
+<body th:fragment="sidebar" id="body">
+<div class="l-navbar" id="navbar">
+    <nav class="nav">
+        <div>
+            <a href="#" class="nav__logo">
+                <img th:src="@{/assets/logo/icono-logo.svg}" alt="" class="nav__logo-icon">
+                <span class="nav__logo-text">VetPlanet</span>
+            </a>
+
+            <div class="nav__toggle" id="nav-toggle">
+                <i class='bx bx-chevron-right'></i>
+            </div>
+
+            <ul class="nav__list">
+                <a th:href="@{/admin/dashboard}" class="nav__link">
+                    <i class='bx bx-grid-alt nav__icon'></i>
+                    <span class="nav__text">Dashboard</span>
+                </a>
+                <a th:href="@{/admin/usuarios}" class="nav__link">
+                    <i class='bx bx-user nav__icon'></i>
+                    <span class="nav__text">Usuarios</span>
+                </a>
+                <a th:href="@{/admin/servicios}" class="nav__link">
+                    <i class='bx bx-first-aid nav__icon'></i>
+                    <span class="nav__text">Servicios</span>
+                </a>
+                <a th:href="@{/admin/citas}" class="nav__link">
+                    <i class='bx bx-calendar nav__icon'></i>
+                    <span class="nav__text">Citas</span>
+                </a>
+                <a th:href="@{/admin/reportes}" class="nav__link">
+                    <i class='bx bx-bar-chart-alt-2 nav__icon'></i>
+                    <span class="nav__text">Reportes</span>
+                </a>
+            </ul>
+        </div>
+        <a th:href="@{/logout}" class="nav__link">
+            <i class='bx bx-log-out-circle nav__icon'></i>
+            <span class="nav__text">Cerrar Sesión</span>
+        </a>
+    </nav>
+</div>
+</body>
+</html>

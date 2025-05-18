@@ -1,0 +1,131 @@
+/* Estilos para la lista de mascotas */
+
+/* Contenido principal */
+.main-content {
+    padding-top: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    transition: none;
+}
+
+/* Encabezado de la página */
+.page-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.page-title {
+    color: #12192C;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+/* Tarjetas de mascotas */
+.pet-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-radius: 0.5rem;
+    border: none;
+    overflow: hidden;
+    height: 100%;
+}
+
+.pet-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.pet-card .card-body {
+    padding: 1.5rem;
+}
+
+.pet-card .card-title {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #12192C;
+}
+
+.pet-card .badge {
+    padding: 0.5rem 0.75rem;
+    font-weight: 500;
+    margin-right: 0.35rem;
+}
+
+.pet-card .card-footer {
+    padding: 1rem 1.5rem;
+}
+
+/* Estado vacío */
+.empty-state {
+    text-align: center;
+    padding: 4rem 0;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+    margin-top: 1rem;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    color: #F5A623;
+    margin-bottom: 1.5rem;
+}
+
+.empty-state h4 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #12192C;
+}
+
+/* Botones */
+.btn-primary {
+    background-color: #F5A623;
+    border-color: #F5A623;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #e09814;
+    border-color: #e09814;
+}
+
+.btn-outline-primary {
+    color: #F5A623;
+    border-color: #F5A623;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+    background-color: #F5A623;
+    border-color: #F5A623;
+}
+
+/* Cuando el sidebar está expandido */
+body.expander .main-content {
+    padding-left: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+    .pet-card .d-flex.justify-content-between {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .pet-card .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .main-content {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}

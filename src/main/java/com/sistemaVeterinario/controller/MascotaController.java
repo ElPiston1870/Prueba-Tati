@@ -37,14 +37,14 @@ public class MascotaController {
 
         List<Mascota> mascotas = mascotaService.findByPropietario(usuarioActual);
         model.addAttribute("mascotas", mascotas);
-        return "mascotas/lista";
+        return "mascotas/listaMascota";
     }
 
     @GetMapping("/nueva")
     public String mostrarFormularioNuevaMascota(Model model) {
         model.addAttribute("mascota", new Mascota());
         model.addAttribute("titulo", "Agregar Nueva Mascota");
-        return "mascotas/form";
+        return "mascotas/formMascota";
     }
 
     @PostMapping("/guardar")
@@ -53,7 +53,7 @@ public class MascotaController {
                                  BindingResult result,
                                  RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
-            return "mascotas/form";
+            return "mascotas/formMascota";
         }
 
         // Obtener el usuario autenticado y asignarlo como propietario
@@ -97,7 +97,7 @@ public class MascotaController {
         model.addAttribute("mascota", mascota);
         model.addAttribute("titulo", "Editar Mascota");
         model.addAttribute("fechaNacimientoStr", mascota.getFechaNacimiento());
-        return "mascotas/form";
+        return "mascotas/formMascota";
     }
 
     @GetMapping("/eliminar/{id}")
@@ -146,6 +146,6 @@ public class MascotaController {
         }
 
         model.addAttribute("mascota", mascota);
-        return "mascotas/detalles";
+        return "mascotas/detallesMascota";
     }
 }

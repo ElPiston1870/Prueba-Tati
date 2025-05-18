@@ -68,8 +68,8 @@ public class SecurityConfig {
     }
     @Bean
     public AccessDeniedHandler deniedHandler() {
-        return (request, response, auth) -> {
-            response.sendRedirect("/error/403");
+        return (request, response, accessDeniedException) -> {
+            request.getRequestDispatcher("/error/403").forward(request, response);
         };
     }
     @Bean
