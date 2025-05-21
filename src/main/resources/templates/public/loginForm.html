@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de Sesión</title>
+    <title th:text="#{login.title}">Inicio de Sesión</title>
     <link rel="stylesheet" th:href="@{/css/loginForm.css}">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -22,31 +22,31 @@
 
             <div class="col-md-6 right">
                 <div class="input-box">
-                    <header class="header text-center" th:text="#{login.title}"></header>
+                    <header class="header text-center" th:text="#{login.title}">Inicio de sesión</header>
                     <!--Formulario de inicio de sesion-->
                     <form th:action="@{/login}" method="post">
                         <!--Campo nombre-->
                         <div class="input-field">
                             <input type="email" name="username" class="input" id="email" required="" autocomplete="off">
-                            <label for="email" th:text="#{login.email}"></label>
+                            <label for="email" th:text="#{login.email}">Correo Electrónico</label>
                         </div>
                         <!--Campo contraseña-->
                         <div class="input-field">
                             <input type="password" name="password" class="input" id="password" required="">
-                            <label for="password" th:text="#{login.password}"></label>
+                            <label for="password" th:text="#{login.password}">Contraseña</label>
                         </div>
                         <!-- Mensaje de error de credenciales -->
                         <div th:if="${errorMessage != null}" class="text-danger mt-3 text-center">
                             <p th:text="${errorMessage}"></p>
                         </div>
                         <!--Boton de inicio de sesion-->
-                        <button type="submit" class="btn-login fw-bold my-2" th:text="#{login.button}"></button>
+                        <button type="submit" class="btn-login fw-bold my-2" th:text="#{login.button}">Iniciar Sesión</button>
                         <!--Boton para regresar-->
-                        <a th:href="@{/}" class="btn-regresar fw-bold my-2 text-center" th:text="#{login.returnButton}"></a>
+                        <a th:href="@{/}" class="btn-regresar fw-bold my-2 text-center" th:text="#{login.returnButton}">Regresar al Inicio</a>
                         <!--Enlace para registrarse-->
                         <div class="span-registro text-center">
-                            <span th:text="#{login.questionSpan}"></span>
-                            <a class="login-link" th:href="@{/register}" th:text="#{login.registerLink}"> <span th:text="#{login.questionSpan}"></span></a>
+                            <span th:text="#{login.questionSpan}">¿No tienes una cuenta?</span>
+                            <a class="login-link" th:href="@{/register}" th:text="#{login.registerLink}">Regístrate ahora</a>
                         </div>
                     </form>
                 </div>

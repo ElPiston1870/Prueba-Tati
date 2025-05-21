@@ -1,4 +1,4 @@
-package com.sistemaVeterinario.Scheeduler;
+package com.sistemaVeterinario.Scheduler;
 
 import com.sistemaVeterinario.service.CitaService;
 import org.slf4j.Logger;

@@ -1,55 +1,77 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Asul:wght@400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-</head>
-<body>
-    <nav th:fragment="navbar" class="navbar navbar-expand-md fixed-top navbar-vetweb py-2 px-2">
-        <div class="container-fluid">
-            <!-- Logo -->
-            <a class="navbar-brand me-auto">
-                <img th:src="@{/assets/logo/isologo.png}" class="logo-vetweb" alt="VetPlanet Logo">
-            </a>
-            <!-- Contenido colapsable -->
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
-                 aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                    <a class="navbar-brand me-auto" href="#">
-                        <img th:src="@{/assets/logo/isologo.png}" class="logo-vetweb" alt="VetPlanet Logo">
-                    </a>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" aria-current="page" th:href="@{/}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" th:href="@{/about-us}">Acerca de nosotros</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" th:href="@{/register}">Registrarse</a>
-                        </li>
-                    </ul>
-                </div>
+<nav th:fragment="navbar" class="navbar navbar-expand-md fixed-top navbar-vetweb py-2 px-2">
+    <div class="container-fluid">
+        <!-- Logo -->
+        <a class="navbar-brand me-auto">
+            <img th:src="@{/assets/logo/isologo.png}" class="logo-vetweb" alt="VetPlanet Logo">
+        </a>
+        <!-- Contenido colapsable -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+             aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <a class="navbar-brand me-auto" href="#">
+                    <img th:src="@{/assets/logo/isologo.png}" class="logo-vetweb" alt="VetPlanet Logo">
+                </a>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <!-- Boton de sesión-->
-            <a th:href="@{/login}" class="login-btn">INICIAR SESIÓN</a>
-            <!-- Botón hamburguesa para móviles -->
-            <button class="navbar-toggler navbar-toggler-vetweb" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link mx-lg-2" aria-current="page" th:href="@{/}">
+                            <span th:text="#{navbar.home}">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-lg-2" th:href="@{/about-us}">
+                            <span th:text="#{navbar.about}">Acerca de nosotros</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-lg-2" th:href="@{/register}">
+                            <span th:text="#{navbar.register}">Registrarse</span>
+                        </a>
+                    </li>
+                    <!-- Selector de idioma para versión móvil -->
+                    <li class="nav-item dropdown d-md-none">
+                        <a class="nav-link dropdown-toggle language-selector" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-globe"></i>
+                            <span th:if="${#locale.language == 'es'}" th:text="#{language.spanish}">Español</span>
+                            <span th:if="${#locale.language == 'en'}" th:text="#{language.english}">Inglés</span>
+                            <span th:if="${#locale.language == 'it'}" th:text="#{language.italian}">Italiano</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="?lang=es" th:text="#{language.spanish}">Español</a></li>
+                            <li><a class="dropdown-item" href="?lang=en" th:text="#{language.english}">Inglés</a></li>
+                            <li><a class="dropdown-item" href="?lang=it" th:text="#{language.italian}">Italiano</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </nav>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+        <!-- Selector de idioma para desktop -->
+        <div class="dropdown language-desktop me-3 d-none d-md-block">
+            <button class="btn dropdown-toggle language-selector" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-globe me-1"></i>
+                <span th:if="${#locale.language == 'es'}" th:text="#{language.spanish}">Español</span>
+                <span th:if="${#locale.language == 'en'}" th:text="#{language.english}">Inglés</span>
+                <span th:if="${#locale.language == 'it'}" th:text="#{language.italian}">Italiano</span>
+                <i class="bi bi-chevron-down ms-1"></i>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="?lang=es" th:text="#{language.spanish}">Español</a></li>
+                <li><a class="dropdown-item" href="?lang=en" th:text="#{language.english}">Inglés</a></li>
+                <li><a class="dropdown-item" href="?lang=it" th:text="#{language.italian}">Italiano</a></li>
+            </ul>
+        </div>
+
+        <!-- Boton - inicio de sesion-->
+        <a th:href="@{/login}" class="login-btn">
+            <span th:text="#{navbar.login}">INICIAR SESIÓN</span>
+        </a>
+        <!-- Boton hamburguesa para móviles -->
+        <button class="navbar-toggler navbar-toggler-vetweb" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>

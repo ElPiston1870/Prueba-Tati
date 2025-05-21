@@ -136,10 +136,177 @@ a {
     padding: 1rem 0 0 12rem;
     transition: 0.5s;
 }
+/* Estilos adicionales para el selector de idioma */
+.language-selector {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    color: var(--white-color);
+    transition: 0.3s;
+    cursor: pointer;
+    position: relative;
+}
+
+.language-selector:hover {
+    background-color: var(--second-color);
+    color: var(--first-color);
+}
+
+.language-select {
+    background-color: transparent;
+    border: none;
+    color: var(--white-color);
+    font-family: var(--body-font);
+    font-size: var(--small-font-size);
+    padding: 0.25rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    outline: none;
+    width: calc(100% - 2rem);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.language-select:hover {
+    color: var(--first-color);
+}
+
+/* Estilo para el icono del selector */
+.language-selector::after {
+    content: "\25BC";
+    font-size: 0.7rem;
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* Estilo para las opciones del selector */
+.language-select option {
+    background-color: var(--first-color);
+    color: var(--white-color);
+    padding: 0.5rem;
+}
+
+/* Cuando el sidebar está expandido */
+.show .language-selector {
+    justify-content: flex-start;
+}
+
+.show .language-select {
+    display: block;
+}
+
+
+
+/*===== COLLAPSE MENU (Adaptado a tu diseño) =====*/
+.collapse {
+    position: relative;
+}
+.collapse__link {
+    margin-left: auto;
+    transition: transform 0.5s;
+}
+.collapse__menu {
+    display: none;
+    background-color: var(--first-color);
+    border-radius: 0 0 0.5rem 0.5rem;
+    padding: 0.5rem 0;
+    margin-top: -0.5rem; /* Ajuste para solaparse con nav__link */
+}
+.collapse__menu li {
+    padding: 0.3rem 1.5rem 0.3rem 3.5rem; /* Alineación con ícono */
+}
+.collapse__sublink {
+    color: var(--white-color);
+    font-size: var(--small-font-size);
+    display: block;
+}
+.collapse__sublink:hover {
+    color: var(--second-color);
+}
+/* Mostrar dropdown */
+.showCollapse {
+    display: block;
+}
+/* Rotar ícono */
+.rotate {
+    transform: rotate(180deg);
+}
+
+body:not(.expander) .nav:not(.show) .nav__text {
+    display: none;
+}
 
 /* Responsive */
 @media screen and (min-width: 768px){
     :root {
         --small-font-size: 0.938rem;
     }
+}
+
+
+
+/* Estilos para el dropdown de idiomas */
+.dropdown-language {
+    position: relative;
+    width: 100%;
+}
+
+.dropdown-toggle {
+    position: relative;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.dropdown-icon {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    transition: transform 0.3s;
+    font-size: 1.2rem !important;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--first-color);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0;
+    margin-top: 0.2rem;
+    display: none;
+    z-index: var(--z-modal);
+}
+
+.show-dropdown {
+    display: block;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--white-color);
+    transition: 0.3s;
+    font-size: var(--small-font-size);
+}
+
+.dropdown-item:hover {
+    background-color: var(--second-color);
+    color: var(--first-color);
+}
+
+/* Estilo para el icono rotado */
+.rotate {
+    transform: rotate(180deg);
+}
+
+/* Ajustes para el sidebar colapsado */
+body:not(.expander) .nav:not(.show) .dropdown-toggle .nav__text,
+body:not(.expander) .nav:not(.show) .dropdown-icon {
+    display: none;
 }

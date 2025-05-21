@@ -31,7 +31,7 @@ public class PublicController {
 
     @GetMapping("/error/403")
     public String error403() {
-        return "error/403"; // Página específica para acceso denegado
+        return "error/403";
     }
 
     @GetMapping("/")
