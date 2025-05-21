@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar menu</title>
-</head>
 <body th:fragment="sidebar" id="body">
 <div class="l-navbar" id="navbar">
     <nav class="nav">
@@ -31,28 +24,33 @@
                     <i class='bx bx-bookmark nav__icon'></i>
                     <span class="nav__text" th:text="#{sidebar.saved}">Guardados</span>
                 </a>
-
                 <!-- Dropdown para idiomas -->
                 <div class="dropdown-language">
                     <a href="#" class="nav__link dropdown-toggle" id="languageDropdown">
                         <i class='bx bx-globe nav__icon'></i>
-                        <span class="nav__text" th:text="#{sidebar.language}">Idioma</span>
+                        <span class="nav__text">
+                            <span th:if="${#locale.language == 'es'}" th:text="#{language.spanish}">Español</span>
+                            <span th:if="${#locale.language == 'en'}" th:text="#{language.english}">English</span>
+                            <span th:if="${#locale.language == 'it'}" th:text="#{language.italian}">Italiano</span>
+                        </span>
                         <i class='bx bx-chevron-down nav__icon dropdown-icon'></i>
                     </a>
                     <div class="dropdown-menu" id="languageMenu">
-                        <a th:href="@{'?lang=es'}" class="dropdown-item">
+                        <a href="?lang=es" class="dropdown-item">
                             <span th:text="#{language.spanish}">Español</span>
                         </a>
-                        <a th:href="@{'?lang=en'}" class="dropdown-item">
+                        <a href="?lang=en" class="dropdown-item">
                             <span th:text="#{language.english}">English</span>
                         </a>
-                        <a th:href="@{'?lang=it'}" class="dropdown-item">
+                        <a href="?lang=it" class="dropdown-item">
                             <span th:text="#{language.italian}">Italiano</span>
                         </a>
                     </div>
                 </div>
             </ul>
         </div>
+
+        <!-- Opcion de logout -->
         <div class="nav__link" style="cursor: pointer;">
             <form th:action="@{/logout}" method="post" style="display: inline;">
                 <button type="submit" style="background: none; border: none; color: inherit; padding: 0; font: inherit; cursor: pointer; display: flex; align-items: center; width: 100%;">
@@ -61,31 +59,7 @@
                 </button>
             </form>
         </div>
+
     </nav>
 </div>
-
-<!-- JavaScript para el dropdown de idiomas -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const languageDropdown = document.getElementById('languageDropdown');
-        const languageMenu = document.getElementById('languageMenu');
-
-        if (languageDropdown && languageMenu) {
-            languageDropdown.addEventListener('click', function(e) {
-                e.preventDefault();
-                languageMenu.classList.toggle('show-dropdown');
-                this.querySelector('.dropdown-icon').classList.toggle('rotate');
-            });
-
-            // Cerrar el menú cuando se hace clic fuera
-            document.addEventListener('click', function(e) {
-                if (!languageDropdown.contains(e.target) && !languageMenu.contains(e.target)) {
-                    languageMenu.classList.remove('show-dropdown');
-                    languageDropdown.querySelector('.dropdown-icon').classList.remove('rotate');
-                }
-            });
-        }
-    });
-</script>
 </body>
-</html>

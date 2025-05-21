@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestión de Usuarios - Sistema Veterinario</title>
+  <title th:text="#{adminUsers.pageTitle}">Gestión de Usuarios - Sistema Veterinario</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
@@ -22,12 +22,12 @@
   <div class="page-header">
     <div class="d-flex justify-content-between align-items-center">
       <div>
-        <h1 class="page-title">Gestión de Usuarios</h1>
-        <p class="page-subtitle">Administre los usuarios del sistema</p>
+        <h1 class="page-title" th:text="#{adminUsers.title}">Gestión de Usuarios</h1>
+        <p class="page-subtitle" th:text="#{adminUsers.subtitle}">Administre los usuarios del sistema</p>
       </div>
       <div>
         <a th:href="@{/admin/usuarios/nuevo}" class="btn btn-primary">
-          <i class="bi bi-person-plus me-2"></i> Nuevo Usuario
+          <i class="bi bi-person-plus me-2"></i> <span th:text="#{adminUsers.newUser}">Nuevo Usuario</span>
         </a>
       </div>
     </div>
@@ -46,9 +46,9 @@
       <form th:action="@{/admin/usuarios}" method="get" class="d-flex">
         <div class="input-group">
           <input type="text" name="search" class="form-control"
-                 placeholder="Buscar por nombre o email" th:value="${search}">
+                 th:placeholder="#{adminUsers.searchPlaceholder}" placeholder="Buscar por nombre o email" th:value="${search}">
           <button class="btn btn-outline-primary" type="submit">
-            <i class="bi bi-search me-1"></i> Buscar
+            <i class="bi bi-search me-1"></i> <span th:text="#{adminUsers.searchButton}">Buscar</span>
           </button>
         </div>
       </form>
@@ -59,20 +59,20 @@
       <table class="table table-striped table-hover">
         <thead>
         <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Apellido</th>
-          <th>Email</th>
-          <th>Teléfono</th>
-          <th>Roles</th>
-          <th>Acciones</th>
+          <th th:text="#{adminUsers.table.id}">ID</th>
+          <th th:text="#{adminUsers.table.name}">Nombre</th>
+          <th th:text="#{adminUsers.table.lastName}">Apellido</th>
+          <th th:text="#{adminUsers.table.email}">Email</th>
+          <th th:text="#{adminUsers.table.phone}">Teléfono</th>
+          <th th:text="#{adminUsers.table.roles}">Roles</th>
+          <th th:text="#{adminUsers.table.actions}">Acciones</th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${usuarios.empty}">
           <td colspan="7" class="text-center py-4">
             <i class="bi bi-people text-muted d-block mb-3" style="font-size: 2rem;"></i>
-            No hay usuarios registrados
+            <span th:text="#{adminUsers.noUsers}">No hay usuarios registrados</span>
           </td>
         </tr>
         <tr th:each="usuario : ${usuarios}">
@@ -89,7 +89,7 @@
           <td>
             <a th:href="@{/admin/usuarios/editar/{id}(id=${usuario.idUsuario})}"
                class="btn btn-sm btn-warning">
-              <i class="bi bi-pencil-square me-1"></i> Editar
+              <i class="bi bi-pencil-square me-1"></i> <span th:text="#{adminUsers.editButton}">Editar</span>
             </a>
           </td>
         </tr>

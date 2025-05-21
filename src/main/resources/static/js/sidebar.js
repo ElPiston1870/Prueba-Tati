@@ -25,3 +25,25 @@ function colorLink(){
 }
 
 linkColor.forEach(l => l.addEventListener('click', colorLink));
+
+<!-- JavaScript para el dropdown de idiomas -->
+document.addEventListener('DOMContentLoaded', function() {
+    const languageDropdown = document.getElementById('languageDropdown');
+    const languageMenu = document.getElementById('languageMenu');
+
+    if (languageDropdown && languageMenu) {
+        languageDropdown.addEventListener('click', function(e) {
+            e.preventDefault();
+            languageMenu.classList.toggle('show-dropdown');
+            this.querySelector('.dropdown-icon').classList.toggle('rotate');
+        });
+        // Cerrar el menú cuando se hace clic fuera
+        document.addEventListener('click', function(e) {
+            if (!languageDropdown.contains(e.target) && !languageMenu.contains(e.target)) {
+                languageMenu.classList.remove('show-dropdown');
+                languageDropdown.querySelector('.dropdown-icon').classList.remove('rotate');
+            }
+        });
+    }
+});
+

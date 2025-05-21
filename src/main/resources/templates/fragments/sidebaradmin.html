@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar Admin</title>
-</head>
 <body th:fragment="sidebar" id="body">
 <div class="l-navbar" id="navbar">
     <nav class="nav">
@@ -39,13 +32,42 @@
                     <i class='bx bx-bar-chart-alt-2 nav__icon'></i>
                     <span class="nav__text">Reportes</span>
                 </a>
+                <!-- Dropdown para idiomas -->
+                <div class="dropdown-language">
+                    <a href="#" class="nav__link dropdown-toggle" id="languageDropdown">
+                        <i class='bx bx-globe nav__icon'></i>
+                        <span class="nav__text">
+                            <span th:if="${#locale.language == 'es'}" th:text="#{language.spanish}">Español</span>
+                            <span th:if="${#locale.language == 'en'}" th:text="#{language.english}">English</span>
+                            <span th:if="${#locale.language == 'it'}" th:text="#{language.italian}">Italiano</span>
+                        </span>
+                        <i class='bx bx-chevron-down nav__icon dropdown-icon'></i>
+                    </a>
+                    <div class="dropdown-menu" id="languageMenu">
+                        <a href="?lang=es" class="dropdown-item">
+                            <span th:text="#{language.spanish}">Español</span>
+                        </a>
+                        <a href="?lang=en" class="dropdown-item">
+                            <span th:text="#{language.english}">English</span>
+                        </a>
+                        <a href="?lang=it" class="dropdown-item">
+                            <span th:text="#{language.italian}">Italiano</span>
+                        </a>
+                    </div>
+                </div>
             </ul>
         </div>
-        <a th:href="@{/logout}" class="nav__link">
-            <i class='bx bx-log-out-circle nav__icon'></i>
-            <span class="nav__text">Cerrar Sesión</span>
-        </a>
+
+        <!-- Opcion de logout -->
+        <div class="nav__link" style="cursor: pointer;">
+            <form th:action="@{/logout}" method="post" style="display: inline;">
+                <button type="submit" style="background: none; border: none; color: inherit; padding: 0; font: inherit; cursor: pointer; display: flex; align-items: center; width: 100%;">
+                    <i class='bx bx-log-out-circle nav__icon'></i>
+                    <span class="nav__text" th:text="#{sidebar.logout}">Cerrar Sesión</span>
+                </button>
+            </form>
+        </div>
+
     </nav>
 </div>
 </body>
-</html>
