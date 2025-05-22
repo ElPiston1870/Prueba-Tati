@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agendar Cita - Sistema Veterinario</title>
+    <title th:text="#{scheduleAppointment.title}">Agendar Cita</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -20,8 +20,8 @@
 <div class="main-content">
     <!-- Encabezado de página -->
     <div class="page-header">
-        <h1 class="page-title">Agendar Nueva Cita</h1>
-        <p class="page-subtitle">Seleccione su mascota, servicio y horario disponible</p>
+        <h1 class="page-title" th:text="#{scheduleAppointment.mainTitle}">Agendar Nueva Cita</h1>
+        <p class="page-subtitle" th:text="#{scheduleAppointment.subtitle}">Seleccione su mascota, servicio y horario disponible</p>
     </div>
 
     <div class="row">
@@ -31,12 +31,12 @@
                     <!-- Sección para seleccionar mascota y servicio -->
                     <div class="col-md-6">
                         <div class="form-section">
-                            <h5 class="section-title">Datos de la Cita</h5>
+                            <h5 class="section-title" th:text="#{appointmentData.title}">Datos de la Cita</h5>
 
                             <div class="form-group mb-4">
-                                <label for="mascotaId" class="form-label">Seleccione su mascota:</label>
+                                <label for="mascotaId" class="form-label" th:text="#{petSelection.label}">Seleccione su mascota:</label>
                                 <select class="form-select" id="mascotaId" name="mascotaId" required>
-                                    <option value="">-- Seleccione una mascota --</option>
+                                    <option value="" th:text="#{petSelection.placeholder}">-- Seleccione una mascota --</option>
                                     <option th:each="mascota : ${mascotas}"
                                             th:value="${mascota.idMascota}"
                                             th:text="${mascota.nombre + ' (' + mascota.especie + ' - ' + mascota.raza + ')'}">
@@ -45,9 +45,9 @@
                             </div>
 
                             <div class="form-group mb-4">
-                                <label for="servicioId" class="form-label">Tipo de servicio:</label>
+                                <label for="servicioId" class="form-label" th:text="#{serviceSelection.label}">Tipo de servicio:</label>
                                 <select class="form-select" id="servicioId" name="servicioId" required>
-                                    <option value="">-- Seleccione un servicio --</option>
+                                    <option value="" th:text="#{serviceSelection.placeholder}">-- Seleccione un servicio --</option>
                                     <option th:each="servicio : ${servicios}"
                                             th:value="${servicio.idServicio}"
                                             th:text="${servicio.nombre}"
@@ -62,12 +62,12 @@
                     <!-- Sección para seleccionar fecha -->
                     <div class="col-md-6">
                         <div class="form-section">
-                            <h5 class="section-title">Fecha de la Cita</h5>
+                            <h5 class="section-title" th:text="#{appointmentDate.title}">Fecha de la Cita</h5>
 
                             <div class="form-group mb-4">
-                                <label for="fechaSeleccionada" class="form-label">Seleccione una fecha:</label>
+                                <label for="fechaSeleccionada" class="form-label" th:text="#{dateSelection.label}">Seleccione una fecha:</label>
                                 <select class="form-select" id="fechaSeleccionada" name="fechaSeleccionada" required>
-                                    <option value="">-- Seleccione una fecha --</option>
+                                    <option value="" th:text="#{dateSelection.placeholder}">-- Seleccione una fecha --</option>
                                     <option th:each="fecha : ${fechasDisponibles}"
                                             th:value="${fecha}"
                                             th:text="${#temporals.format(fecha, 'EEEE, d MMMM yyyy')}">
@@ -76,7 +76,7 @@
                             </div>
 
                             <div class="alert alert-info" id="fechaSeleccionInfo">
-                                <i class="fas fa-info-circle"></i> Seleccione una fecha para ver los horarios disponibles.
+                                <i class="fas fa-info-circle"></i> <span th:text="#{dateSelection.info}">Seleccione una fecha para ver los horarios disponibles.</span>
                             </div>
                         </div>
                     </div>
@@ -84,10 +84,10 @@
 
                 <!-- Sección para seleccionar hora -->
                 <div class="form-section mt-4">
-                    <h5 class="section-title">Horarios Disponibles</h5>
+                    <h5 class="section-title" th:text="#{availableTimes.title}">Horarios Disponibles</h5>
                     <div id="horariosContainer" class="row g-3 mt-2">
                         <div class="col-12 text-center py-4">
-                            <p class="text-muted">Seleccione una fecha y servicio para ver los horarios disponibles</p>
+                            <p class="text-muted" th:text="#{availableTimes.message}">Seleccione una fecha y servicio para ver los horarios disponibles</p>
                         </div>
                     </div>
                     <input type="hidden" id="horaSeleccionada" name="horaSeleccionada" required>
@@ -95,7 +95,7 @@
 
                 <div class="d-grid gap-2 col-md-6 mx-auto mt-4">
                     <button type="submit" class="btn btn-primary btn-lg" id="btnReservar" disabled>
-                        <i class="fas fa-calendar-check"></i> Reservar Cita
+                        <i class="fas fa-calendar-check"></i> <span th:text="#{bookAppointment.button}">Reservar Cita</span>
                     </button>
                 </div>
             </form>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mis Citas - Sistema Veterinario</title>
+  <title th:text="#{myAppointments.title}">Mis Citas</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -19,21 +19,21 @@
 <div class="main-content">
   <!-- Encabezado de página -->
   <div class="page-header">
-    <h1 class="page-title">Mis Citas</h1>
-    <p class="page-subtitle">Administre sus citas veterinarias programadas</p>
+    <h1 class="page-title" th:text="#{myAppointments.mainTitle}">Mis Citas</h1>
+    <p class="page-subtitle" th:text="#{myAppointments.subtitle}">Administre sus citas veterinarias programadas</p>
   </div>
 
   <div class="row">
     <div class="col-12">
       <div class="d-flex justify-content-end mb-4">
         <a th:href="@{/citas/agendar}" class="btn btn-primary">
-          <i class="fas fa-plus"></i> Nueva Cita
+          <i class="fas fa-plus"></i> <span th:text="#{newAppointment.button}">Nueva Cita</span>
         </a>
       </div>
 
       <!-- Alerta de éxito -->
       <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${param.exito}">
-        <i class="fas fa-check-circle"></i> ¡Cita agendada exitosamente!
+        <i class="fas fa-check-circle"></i> <span th:text="#{appointmentSuccess.message}">¡Cita agendada exitosamente!</span>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
 
@@ -41,9 +41,9 @@
       <div class="filter-section mb-4">
         <div class="row g-3">
           <div class="col-md-4">
-            <label for="mascotaFilter" class="form-label">Filtrar por mascota</label>
+            <label for="mascotaFilter" class="form-label" th:text="#{filterByPet.label}">Filtrar por mascota</label>
             <select id="mascotaFilter" class="form-select">
-              <option value="">Todas las mascotas</option>
+              <option value="" th:text="#{filterByPet.allOption}">Todas las mascotas</option>
               <option th:each=" mascota : ${mascotas}"
                       th:value="${mascota.idMascota}"
                       th:text="${mascota.nombre}">
@@ -51,18 +51,18 @@
             </select>
           </div>
           <div class="col-md-4">
-            <label for="estadoFilter" class="form-label">Filtrar por estado</label>
+            <label for="estadoFilter" class="form-label" th:text="#{filterByStatus.label}">Filtrar por estado</label>
             <select id="estadoFilter" class="form-select">
-              <option value="">Todos los estados</option>
-              <option value="Programada">Programada</option>
-              <option value="Completada">Completada</option>
-              <option value="Cancelada">Cancelada</option>
+              <option value="" th:text="#{filterByStatus.allOption}">Todos los estados</option>
+              <option value="Programada" th:text="#{appointmentStatus.scheduled}">Programada</option>
+              <option value="Completada" th:text="#{appointmentStatus.completed}">Completada</option>
+              <option value="Cancelada" th:text="#{appointmentStatus.cancelled}">Cancelada</option>
             </select>
           </div>
           <div class="col-md-4">
             <label class="form-label d-block">&nbsp;</label>
             <button id="resetFilters" class="btn btn-secondary w-100">
-              <i class="fas fa-sync-alt"></i> Resetear filtros
+              <i class="fas fa-sync-alt"></i> <span th:text="#{resetFilters.button}">Resetear filtros</span>
             </button>
           </div>
         </div>
@@ -72,10 +72,10 @@
       <div id="citasList">
         <div th:if="${#lists.isEmpty(citas)}" class="empty-state">
           <i class="fas fa-calendar-times"></i>
-          <h4>No tienes citas agendadas</h4>
-          <p class="text-muted">Agenda tu primera cita haciendo clic en el botón "Nueva Cita"</p>
+          <h4 th:text="#{emptyState.title}">No tienes citas agendadas</h4>
+          <p class="text-muted" th:text="#{emptyState.message}">Agenda tu primera cita haciendo clic en el botón "Nueva Cita"</p>
           <a th:href="@{/citas/agendar}" class="btn btn-primary mt-3">
-            <i class="fas fa-plus"></i> Agendar Cita
+            <i class="fas fa-plus"></i> <span th:text="#{scheduleAppointment.button}">Agendar Cita</span>
           </a>
         </div>
 
@@ -102,14 +102,14 @@
 
                 <div class="cita-details">
                   <div class="cita-detail">
-                    <small class="detail-label">Fecha:</small>
+                    <small class="detail-label" th:text="#{appointmentCard.dateLabel}">Fecha:</small>
                     <strong class="detail-value">
                       <i class="far fa-calendar-alt me-1"></i>
                       <span th:text="${#temporals.format(cita.fechaHora, 'dd/MM/yyyy')}"></span>
                     </strong>
                   </div>
                   <div class="cita-detail">
-                    <small class="detail-label">Hora:</small>
+                    <small class="detail-label" th:text="#{appointmentCard.timeLabel}">Hora:</small>
                     <strong class="detail-value">
                       <i class="far fa-clock me-1"></i>
                       <span th:text="${#temporals.format(cita.fechaHora, 'HH:mm')}"></span>
@@ -121,13 +121,13 @@
                   <a th:if="${cita.estado.name() == 'Programada'}"
                      th:href="@{/citas/cancelar/{id}(id=${cita.idCita})}"
                      class="btn btn-sm btn-outline-danger me-2"
-                     onclick="return confirm('¿Estás seguro de cancelar esta cita?')">
-                    <i class="fas fa-times"></i> Cancelar
+                     th:onclick="'return confirm(\'' + #{cancelConfirmation.message} + '\')'">
+                    <i class="fas fa-times"></i> <span th:text="#{cancelAppointment.button}">Cancelar</span>
                   </a>
                   <a th:if="${cita.estado.name() == 'Programada'}"
                      th:href="@{/citas/editar/{id}(id=${cita.idCita})}"
                      class="btn btn-sm btn-outline-primary">
-                    <i class="fas fa-edit"></i> Reprogramar
+                    <i class="fas fa-edit"></i> <span th:text="#{rescheduleButton.text}">Reprogramar</span>
                   </a>
                 </div>
               </div>
