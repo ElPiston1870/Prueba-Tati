@@ -6,6 +6,7 @@ import com.sistemaVeterinario.models.Usuario;
 import com.sistemaVeterinario.service.AdminUsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -78,12 +79,32 @@ public class AdminUsuarioController {
             adminUsuarioService.createUsuario(usuario, rolesIds);
             redirectAttributes.addFlashAttribute("mensaje", "Usuario creado exitosamente");
             return "redirect:/admin/usuarios";
+        } catch (DataIntegrityViolationException e) {
+            // Manejo específico para violación de datos (ej: duplicados)
+            String errorMessage = "Error de datos: ";
+            if (e.getMessage().contains(usuario.getTelefono())) {
+                errorMessage += "El teléfono ya está registrado";
+            } else if (e.getMessage().contains(usuario.getEmail())) {
+                errorMessage += "El email ya está registrado";
+            } else {
+                errorMessage += "Datos inválidos o duplicados";
+            }
+            model.addAttribute("error", errorMessage);
+        } catch (IllegalArgumentException e) {
+            // Manejo para parámetros inválidos
+            model.addAttribute("error", "Datos inválidos: " + e.getMessage());
         } catch (Exception e) {
-            model.addAttribute("error", "Error al crear el usuario: " + e.getMessage());
+            // Manejo genérico para otros errores
+
+            model.addAttribute("error", "Error inesperado al crear el usuario");
+        } finally {
+            // Prepara el modelo para volver a mostrar el formulario
             model.addAttribute("roles", adminUsuarioService.getAllRoles());
             model.addAttribute("esNuevo", true);
-            return "admin/formulario";
+            model.addAttribute("usuario", usuario); // Mantener los datos ingresados
         }
+
+        return "admin/formulario";
     }
 
     /**
@@ -114,7 +135,7 @@ public class AdminUsuarioController {
      */
     @PostMapping("/editar/{id}")
     public String actualizarUsuario(@PathVariable Integer id,
-                                    @Valid @ModelAttribute("usuario") UsuarioDTO usuario,
+                                    @Valid @ModelAttribute("usuario") Usuario usuario,
                                     BindingResult result,
                                     @RequestParam(required = false) Set<Integer> rolesIds,
                                     Model model,

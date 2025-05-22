@@ -99,7 +99,7 @@ public class AdminUsuarioService {
      * Actualiza un usuario existente
      */
     @Transactional
-    public Usuario updateUsuario(Integer id, UsuarioDTO usuarioDTO, Set<Integer> rolesIds) {
+    public Usuario updateUsuario(Integer id, Usuario usuarioDTO, Set<Integer> rolesIds) {
         Optional<Usuario> optionalUsuario = usuarioRepository.findById(id);
         if (optionalUsuario.isPresent()) {
             Usuario usuario = optionalUsuario.get();

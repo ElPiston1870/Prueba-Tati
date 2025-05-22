@@ -49,7 +49,8 @@ public class MascotaController {
 
     @PostMapping("/guardar")
     public String guardarMascota(@ModelAttribute Mascota mascota,
-                                 @RequestParam("fechaNacimientoStr") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaNacimiento,
+                                 @RequestParam("fechaNacimientoStr")
+                                 @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate fechaNacimiento,
                                  BindingResult result,
                                  RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {

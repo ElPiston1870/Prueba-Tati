@@ -13,10 +13,21 @@ import java.util.Optional;
 
 public interface CitaRepository extends JpaRepository<Cita, Integer> {
     List<Cita> findByMascotaPropietario(Optional<Usuario> propietario);
-    List<Cita> findByFechaHoraBetween(LocalDateTime inicio, LocalDateTime fin);
-    List<Cita> findByFechaHoraBetweenAndServicioIdServicio(LocalDateTime inicio, LocalDateTime fin, Integer servicioId);
     List<Cita> findByFechaHora(LocalDateTime fechaHora);
     List<Cita> findByEstadoAndFechaHoraBefore(Cita.EstadoCita estado, LocalDateTime fechaHora);
+
+    @Query("SELECT c FROM Cita c WHERE c.fechaHora BETWEEN :inicio AND :fin AND c.estado != 'Cancelada'")
+    List<Cita> findByFechaHoraBetween(
+            @Param("inicio") LocalDateTime inicio,
+            @Param("fin") LocalDateTime fin);
+
+    // Método para buscar citas entre fechas por servicio excluyendo canceladas
+    @Query("SELECT c FROM Cita c WHERE c.fechaHora BETWEEN :inicio AND :fin " +
+            "AND c.servicio.idServicio = :servicioId AND c.estado != 'Cancelada'")
+    List<Cita>  findByFechaHoraBetweenAndServicioIdServicio(
+            @Param("inicio") LocalDateTime inicio,
+            @Param("fin") LocalDateTime fin,
+            @Param("servicioId") Integer servicioId);
 
     @Modifying
     @Query("UPDATE Cita c SET c.estado = :nuevoEstado WHERE c.estado = :estadoActual AND c.fechaHora < :fechaReferencia")

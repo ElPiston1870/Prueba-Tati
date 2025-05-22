@@ -56,7 +56,7 @@
                             <input type="text" class="form-control" id="nombre" th:field="*{nombre}"
                                    th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''" required>
                             <div class="error-message" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
-                            <div class="form-text" th:text="#{adminNameHelp}">El nombre debe tener entre 3 y 45 caracteres y solo contener letras.</div>
+                            <div class="form-text" th:text="#{adminNameHelp}">El nombre debe tener entre 3 y 50 caracteres y solo contener letras.</div>
                         </div>
                     </div>
 
