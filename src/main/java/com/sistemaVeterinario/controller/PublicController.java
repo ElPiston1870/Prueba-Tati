@@ -54,7 +54,7 @@ public class PublicController {
     @GetMapping("/register")
     public String mostrarRegistro(Model model) {
         model.addAttribute("usuario", new UsuarioDTO());
-        return "/public/registrationForm";
+        return "public/registrationForm";
     }
 
     @PostMapping("/register")
